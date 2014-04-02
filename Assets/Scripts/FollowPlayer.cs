@@ -22,12 +22,22 @@ public class FollowPlayer : MonoBehaviour {
 	IEnumerator CheckNasParadas(){
 
 		transform.LookAt(target.position);
-		transform.Rotate(new Vector3(0,-90,0),Space.Self);//correcting the original rotation
+		//transform.LookAt (Vector3 (0, target.position.y, target.position.z));
+
+		//Q/uaternion neededRotation = Quaternion.LookRotation(target.position - transform.position);
+		
+		//Quaternion interpolatedRotation = Quaternion.Slerp(new Quaternion(transform.position.x, transform.position.y, transform.position.z,0), neededRotation, (Time.deltaTime * .2f));
 
 		
 		direction = target.position - transform.position;
 
-		movement = speed * direction.normalized;
+		movement = speed * transform.forward;
+
+		//transform.Rotate(new Vector3(0,-90,0),Space.Self);//correcting the original rotation
+
+		transform.Rotate(new Vector3(0,-90,0),Space.Self);//correcting the original rotation
+
+
 
 		yield return new WaitForSeconds(waitAndCheck);
 		check = true;
@@ -89,6 +99,8 @@ public class FollowPlayer : MonoBehaviour {
 		MoveVelocity ();
 		//MoveForce ();
 		//MoveTranslate (); <-- n presta...
+
+
 	}
 
 	void MoveForce(){
