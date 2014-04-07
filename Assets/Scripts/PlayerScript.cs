@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 /// <summary>
 /// Player controller and behavior
@@ -10,47 +11,30 @@ public class PlayerScript : MonoBehaviour
 	/// </summary>
 	public Vector2 speed = new Vector2(50, 50);
 	
+    public GUIText endTimeText;
+
 	// 2 - Store the movement
 	private Vector2 movement;
 
 	private float totalTime;
 
-	public GameObject guiText;
+    private bool isJumping;
 	
 	void Update()
 	{
 		// 3 - Retrieve axis information
 		float inputX = Input.GetAxis("Horizontal");
-		float inputY = Input.GetAxis("Vertical");
-		
-		// 4 - Movement per direction
-		movement = new Vector2(
-			speed.x * inputX,
-			speed.y * inputY);
+        float inputY = Input.GetAxis("Vertical");
+        
+        // 4 - Movement per direction
+        movement = new Vector2(
+            speed.x * inputX,
+            speed.y * inputY);
 
-		//Debug.Log ("inputX: " + inputX);
-		//Debug.Log ("inputY: " + inputY);
-
-
-		// ...
-		
-		// 5 - Shooting
-		bool shoot = Input.GetButtonDown("Fire1");
-		shoot |= Input.GetButtonDown("Fire2");
-		// Careful: For Mac users, ctrl + arrow is a bad idea
-		
-		if (shoot)
-		{
-			WeaponScript weapon = GetComponent<WeaponScript>();
-			if (weapon != null)
-			{
-				// false because the player is not an enemy
-				weapon.Attack(false);
-			}
-		}
-		
-		// ...
-
+        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+        {
+            StartCoroutine(JumpCoroutine ());
+        }
 	}
 	
 	void FixedUpdate()
@@ -59,13 +43,40 @@ public class PlayerScript : MonoBehaviour
 		rigidbody2D.velocity = movement;
 	}
 
+    IEnumerator JumpCoroutine()
+    {
+        isJumping = true;
+        renderer.material.color = new Color(0, 255, 255);
+
+        yield return new WaitForSeconds(1);
+
+        isJumping = false;
+        renderer.material.color = new Color(255, 0, 0);
+    }
+
 	void OnCollisionEnter2D(Collision2D hit)
 	{
 		if (hit.gameObject.tag == "Enemy")
 		{
-			totalTime = TimerScript.Instance.GetTotalTime();
-			guiText.GetComponent<GUIText>().text = "TIME " + totalTime;
-			Destroy(this);
+            Destroy();
 		}
 	}
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Trap")
+        {
+            if(!isJumping)
+            {
+                Destroy();
+            }
+        }
+    }
+
+    void Destroy()
+    {
+        totalTime = TimerScript.Instance.GetTotalTime();
+        endTimeText.text = string.Format("TIME {0:f2}", totalTime);
+        Destroy(this);
+    }
 }

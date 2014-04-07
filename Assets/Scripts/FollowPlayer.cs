@@ -19,4 +19,12 @@ public class FollowPlayer : MonoBehaviour {
 		_direction = target.transform.position - transform.position;
 		rigidbody2D.velocity = _direction.normalized * speed;
 	}
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Trap")
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
