@@ -14,12 +14,9 @@ public class FollowPlayer : MonoBehaviour {
 		target = GameObject.FindGameObjectWithTag ("Player");
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
-		if(target != null)
-		{
-			_direction = target.transform.position - transform.position;
-			rigidbody2D.velocity = _direction.normalized * speed;
-		}
+		_direction = target.transform.position - transform.position;
+		rigidbody2D.velocity = _direction.normalized * speed;
 	}
 }
