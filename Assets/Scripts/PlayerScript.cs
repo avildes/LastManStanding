@@ -12,6 +12,10 @@ public class PlayerScript : MonoBehaviour
 	
 	// 2 - Store the movement
 	private Vector2 movement;
+
+	private float totalTime;
+
+	public GameObject guiText;
 	
 	void Update()
 	{
@@ -53,5 +57,15 @@ public class PlayerScript : MonoBehaviour
 	{
 		// 5 - Move the game object
 		rigidbody2D.velocity = movement;
+	}
+
+	void OnCollisionEnter2D(Collision2D hit)
+	{
+		if (hit.gameObject.tag == "Enemy")
+		{
+			totalTime = TimerScript.Instance.GetTotalTime();
+			guiText.GetComponent<GUIText>().text = "TIME " + totalTime;
+			Destroy(this);
+		}
 	}
 }
