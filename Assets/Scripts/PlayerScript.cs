@@ -9,7 +9,7 @@ public class PlayerScript : MonoBehaviour
 	/// <summary>
 	/// Velocidade do player
 	/// </summary>
-	public Vector2 speed = new Vector2(50, 50);
+	public int speed = 8;
 	
     /// <summary>
     /// Texto usado para mostrar o tempo final
@@ -35,30 +35,40 @@ public class PlayerScript : MonoBehaviour
     /// Tempo total de jogo
     /// </summary>
     private float totalTime;
+
+	private bool alive = true;
 	
 	void Update()
 	{
-		// Recupera o input do jogador
-		float inputX = Input.GetAxis("Horizontal");
-        float inputY = Input.GetAxis("Vertical");
+		if(alive)
+		{
+			// Recupera o input do jogador
+			float inputX = Input.GetAxis("Horizontal");
+        	float inputY = Input.GetAxis("Vertical");
         
-        // Seta o vetor de movimento de acordo com o input
-        movement = new Vector2(
-            speed.x * inputX,
-            speed.y * inputY);
+        	// Seta o vetor de movimento de acordo com o input
+			movement = (new Vector2(inputX, inputY)).normalized * speed;
 
+
+		/*
         // FIXME Quando o player esta parado antes de pular, e possivel mudar de direçao
         // Se o player esta pulando, ele pode mover-se apenas na mesma direçao com que iniciou o pulo
-        if (isJumping && jumpMomentVector.magnitude != 0 && !_IsInSameDirection(movement, jumpMomentVector))
+        if (isJumping && jumpMomentVector.magnitude != 0) && !_IsInSameDirection(movement, jumpMomentVector))
         {
             movement = new Vector2(0, 0);
-        }
+        }*/
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
-        {
-            jumpMomentVector = new Vector2(inputX, inputY);
-            StartCoroutine(JumpCoroutine ());
-        }
+        	if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+        	{
+	            jumpMomentVector = new Vector2(inputX, inputY);
+            	StartCoroutine(JumpCoroutine ());
+        	}
+		}
+
+		if(Input.GetKeyDown(KeyCode.R))
+		{
+			Application.LoadLevel(2);
+		}
 	}
 	
 	void FixedUpdate()
@@ -90,9 +100,13 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     private void OnPlayerDeath()
     {
-        totalTime = TimerScript.Instance.GetTotalTime();
-        endTimeText.text = string.Format("TIME {0:f2}", totalTime);
-        Destroy(this);
+		if(alive)
+		{
+			totalTime = TimerScript.Instance.GetTotalTime();
+			endTimeText.text = string.Format("TIME {0:f2}", totalTime);
+			//Destroy(this);
+			alive = false;
+		}
     }
 
     /// <summary>
