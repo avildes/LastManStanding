@@ -170,6 +170,7 @@ Transform:
   - {fileID: 737787516}
   - {fileID: 927976768}
   - {fileID: 1949213661}
+  - {fileID: 1498469837}
   m_Father: {fileID: 0}
 --- !u!1 &131721238
 GameObject:
@@ -1599,7 +1600,7 @@ Transform:
   m_LocalPosition: {x: 30.3846874, y: -1.00971317, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 101563698}
 --- !u!1001 &1521557291
 Prefab:
   m_ObjectHideFlags: 0
@@ -1995,7 +1996,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 101563698}
     m_Modifications:
     - target: {fileID: 400000, guid: 7daef6b89a8565244a8c387b2f7c3dca, type: 2}
       propertyPath: m_LocalPosition.x

@@ -47,6 +47,7 @@ public class PlayerScript : MonoBehaviour
             speed.x * inputX,
             speed.y * inputY);
 
+        // FIXME Quando o player esta parado antes de pular, e possivel mudar de direçao
         // Se o player esta pulando, ele pode mover-se apenas na mesma direçao com que iniciou o pulo
         if (isJumping && jumpMomentVector.magnitude != 0 && !_IsInSameDirection(movement, jumpMomentVector))
         {
