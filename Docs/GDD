@@ -2,73 +2,132 @@ GDD:
 
 Telas
 
-Fluxo
+_ Fluxo
 
-Opening screen > Menu screen > InGame > Score screen (over ou end) > Menu screen
+Opening screen > Menu screen > InGame > Score screen (over ou end) > [DONE] > Menu screen
+Opening screen > Menu screen > InGame > Score screen (over ou end) > [RETRY] > InGame ...
 Opening screen > Menu screen > InGame > Score screen > High Score screen > Menu screen
 Opening screen > Menu screen > High Score screen > Menu screen
 Opening screen > Menu screen > Credit screen > Menu screen
 Opening screen > Menu screen > Option screen > Menu screen
-Wireframe
 
-aaaa
+_ Wireframe
 
-Funcionalidade
+https://www.dropbox.com/s/l7zmfx9ni7p5f5c/fluxo.png (MVP)
 
-sss
+Tema
+
+Distopia cyberpunk desertic post-Apocalipse
+
+_ Background
+
+Num mundo onde a humanidade se refugia de uma inteligência maior e infalível... as máquinas.
+Grupos de humanos vivem em comunidades em áreas conhecidas como techfree, onde existem distorções
+eletromagnéticas que impossibilitam qualquer telecomunicação e com isso as máquinas de se nortearem.
+
+Apesar disso, muitos humanos são capturados pelas máguinas e jogados em uma espécie de jogo mortal,
+o Last Man Standing que visa extinguir a raça humana.
+
+_ Protagonista
+
+Ela - Esse é o nome do espécime 3529981, capturada em 14 de janeiro de 2451, as 12 horsd e 23 minutos.
+Porte fisico - OK
+Saude - OK
+Testes preliminares - OK
+
+_ Inimigos
+
+Module 0 Basic 01 - 
 
 Textos
 
-22
+_ Openning texts
+
+1. Welcome to Last man Standing
+2. Try to survive
+3. Run for your life
+
+_ Menu texts
+
+1. STORY
+2. SURVIVAL
+3. ACHIEVEMENTS
+4. HIGHSCORE
+5. OPTIONS
+6. CREDITS
+7. © 2014 Trapmaker Entertainment. All Rights Reserved.
+
+_ InGame texts
+
+Textos aparecem como legenda em preto com uma voz robótica
+
+1. ...and the game begins!
+2. keep running!
+3. don't fall!
+4. go forward >>
+
+_ Score texts
+
+1. SCORE
+2. TIME
+3. 00:00
+4. 2000pts
+5. ACHIEVEMENTS
 
 Mecânica
 
-Controles
+_ Controles
 
 Setas - Correr Espaço - Pular
 
-Objetivos
+_ Objetivos
 
-Vitória e pontuação
+__ Vitória e pontuação
 
-Não colidir com os inimigos Passar maior tempo vivo, cada segundo vale 10pts Atrair os inimigos para armadilhas, resultando morte dos mesmos 100pts cada Atrair o boss para armadilhas, resultando na morte do mesmo 400pts
+Não colidir com os inimigos,
+Passar maior tempo vivo, cada segundo vale 10pts
+Atrair os inimigos para armadilhas, resultando morte dos mesmos 100pts cada
+Atrair o boss para armadilhas, resultando na morte do mesmo 400pts
 
-Derrota
+__ Derrota
 
 Colidir com um inimigo Cair em uma armadilha
 
 Level Design
 
-mob 01
+_ mob 01
 
-speed 7
+speed 7,5
 
-Story mode
+_ Story mode
 
-Stage 1
+__ Stage 1
 
-Tempo - 60 segundos ND - 1 mob/2s e 1 armadilha/10s
+Tempo - 60 segundos
+ND - 1 mob/2s e 1 armadilha/10s
+
+As armadilhas aparecem e somem com o aparecer da outra armadilha (10s)
 
 O corredor começa caindo na arena - termina com o portão abrindo
 
-Stage 2
+__ Stage 2
 
 Tempo - 60 segundos ND - 1 armadilha/2s e 1 mob/5s
 
 O portão fecha e ele está em um corredor cheio de obstáculos - termina com outro portão
 
-Stage 3
+__ Stage 3
 
-Tempo - até encontrar a saida ND - mobs e armadilhas pré definidos por tile, mobs e armadilhas ativam quando entra no tile Boss - o boss precisa colidir com 10 armadilhas pra poder morrer, tem IA pra caçar o player ativo desde o começo e não ativa armadilha nem mobs.
+Tempo - até encontrar a saida ND - mobs e armadilhas pré definidos por tile,
+mobs e armadilhas ativam quando entra no tile Boss - o boss precisa colidir com 10 armadilhas pra poder morrer,
+tem IA pra caçar o player ativo desde o começo e não ativa armadilha nem mobs.
 
 Entrada do labirinto - encontro com o miniaturo - boss fight - The End
 
-Endless run
+_ Survival mode
 
 Nesse modo o jogo se passa nos 2 primeiros estágios do story mode em loop.
 
 60s-stg1 - 60s-stg2 > 80s-stg1 - 80s-stg2 … de 20 em 20 segundos de acréscimo.
 
-Tema
 
-Background
