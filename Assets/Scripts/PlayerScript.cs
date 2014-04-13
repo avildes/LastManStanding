@@ -24,7 +24,7 @@ public class PlayerScript : MonoBehaviour
     /// <summary>
     /// Vetor de direçao do movimento do jogador no momento do pulo
     /// </summary>
-    private Vector2 jumpMomentVector;
+//    private Vector2 jumpMomentVector;
 
     /// <summary>
     /// Flag que indica se o player esta pulando
@@ -37,14 +37,62 @@ public class PlayerScript : MonoBehaviour
     private float totalTime;
 
 	private bool alive = true;
-	
+
+	public Joystick joystick;
+
+	float joyStickInput (Joystick joy)
+	{
+		Vector2 absJoyPos = new Vector2 (Mathf.Abs(joy.position.x),
+		                         Mathf.Abs(joy.position.y));
+		float xDirection = (joy.position.x > 0) ? 1 : -1;
+		float yDirection = (joy.position.y > 0) ? 1 : -1;
+		return ( ( absJoyPos.x > absJoyPos.y) ? absJoyPos.x * xDirection : absJoyPos.y * yDirection);
+	}
+
+	float CheckJoystickAxis(float value)
+	{
+		float retorno = 0;
+
+		if(value > 0)
+		{
+			retorno = 1;
+		}
+		else if(value < 0)
+		{
+			retorno = -1;
+		}
+
+		return retorno;
+	}
+
 	void Update()
 	{
 		if(alive)
 		{
 			// Recupera o input do jogador
-			float inputX = Input.GetAxis("Horizontal");
-        	float inputY = Input.GetAxis("Vertical");
+			float inputX, inputY;
+
+			if(Input.GetAxis("Horizontal")  != 0)
+			{
+				inputX = Input.GetAxis("Horizontal");
+			}
+			else
+			{
+				inputX = CheckJoystickAxis(joystick.position.x);
+			}
+
+			if(Input.GetAxis("Vertical")  != 0)
+			{
+				inputY = Input.GetAxis("Vertical");
+			}
+			else
+			{
+				inputY = CheckJoystickAxis(joystick.position.y);
+			}
+
+
+			// float inputX = Input.GetAxis("Horizontal") ? Input.GetAxis ("Horizontal") : joyStickInput(moveJoystick);;
+			//float inputY = Input.GetAxis("Vertical") ? Input.GetAxis ("Vertical") : joyStickInput(moveJoystick);
         
         	// Seta o vetor de movimento de acordo com o input
 			movement = (new Vector2(inputX, inputY)).normalized * speed;
@@ -58,10 +106,10 @@ public class PlayerScript : MonoBehaviour
             movement = new Vector2(0, 0);
         }*/
 
-        	if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+        	if (Input.GetKeyDown(KeyCode.Space))
         	{
-	            jumpMomentVector = new Vector2(inputX, inputY);
-            	StartCoroutine(JumpCoroutine ());
+//	            jumpMomentVector = new Vector2(inputX, inputY);
+				PressedJumpButton();
         	}
 		}
 
@@ -70,7 +118,15 @@ public class PlayerScript : MonoBehaviour
 			Application.LoadLevel(2);
 		}
 	}
-	
+
+	void PressedJumpButton()
+	{
+		if(!isJumping)
+		{
+			StartCoroutine(JumpCoroutine());
+		}
+	}
+
 	void FixedUpdate()
 	{
 		rigidbody2D.velocity = movement;

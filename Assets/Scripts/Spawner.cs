@@ -46,10 +46,6 @@ public class Spawner : MonoBehaviour {
 
     Vector3 GetRandomPosition()
     {
-        float x = 0;
-        float y = 0;
-        float z = 0;
-        
         Vector3 vector = new Vector3(0, 0, 0);
         
         vector.x = Random.Range(boundsX2, boundsX1);
@@ -60,10 +56,6 @@ public class Spawner : MonoBehaviour {
 
 	Vector3 GetRandomBoundsPosition()
 	{
-		float x = 0;
-        float y = 0;
-        float z = 0;
-
         float orientation = Random.Range (-1.0F, 1.0F);
 
         Vector3 vector = new Vector3(0, 0, 0);
