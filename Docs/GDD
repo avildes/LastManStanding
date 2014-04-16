@@ -1,5 +1,55 @@
 GDD:
 
+MVP______________________________________________________________
+
+<Versão PC>
+   <ART> Definir tamanho da tela
+   
+<Tela de publicidade + Loading>
+   <Publishing> Pesquisar mercado
+   <DEV> Pesquisar API de sites de games
+   <ART> 
+<Tela de Abertura>
+   <ART> 
+   <DEV> 
+<Tela de Menu>
+   <ART> 
+   <DEV> 
+
+<InGame>
+   <ART> 
+   <DEV> 
+
+   <Personagem>
+         Corre
+         Pula
+         Morre
+   </Personagem>
+
+   <Inimigos>
+      <normal>
+         Corre
+         Pula
+         Morre
+      <rápido>
+         Corre
+         Pula
+         Morre
+   </Inimigos>
+
+   <Obstáculos>
+      <buraco>
+      <parede>
+   </Obstáculos>
+
+<Tela de Score>
+
+<Tela de Créditos>
+
+</Versão PC>
+
+Final_____________________________________________________________
+
 Telas
 
 _ Fluxo
