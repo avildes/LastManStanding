@@ -2,64 +2,12 @@ GDD:
 
 MVP______________________________________________________________
 
-<Versão PC>
-   <ART> Definir tamanho da tela
-   
-<Tela de publicidade + Loading>
-   <Publishing> Pesquisar mercado
-   <DEV> Pesquisar API de sites de games
-   <ART> 
-<Tela de Abertura>
-   <ART> 
-   <DEV> 
-<Tela de Menu>
-   <ART> 
-   <DEV> 
-
-<InGame>
-   <ART> 
-   <DEV> 
-
-   <Personagem>
-         Corre
-         Pula
-         Morre
-   </Personagem>
-
-   <Inimigos>
-      <normal>
-         Corre
-         Pula
-         Morre
-      <rápido>
-         Corre
-         Pula
-         Morre
-   </Inimigos>
-
-   <Obstáculos>
-      <buraco>
-      <parede>
-   </Obstáculos>
-
-<Tela de Score>
-
-<Tela de Créditos>
-
-</Versão PC>
-
-Final_____________________________________________________________
-
 Telas
 
 _ Fluxo
 
 Opening screen > Menu screen > InGame > Score screen (over ou end) > [DONE] > Menu screen
 Opening screen > Menu screen > InGame > Score screen (over ou end) > [RETRY] > InGame ...
-Opening screen > Menu screen > InGame > Score screen > High Score screen > Menu screen
-Opening screen > Menu screen > High Score screen > Menu screen
-Opening screen > Menu screen > Credit screen > Menu screen
-Opening screen > Menu screen > Option screen > Menu screen
 
 _ Wireframe
 
@@ -87,48 +35,69 @@ Testes preliminares - OK
 
 _ Inimigos
 
-Module 0 Basic 01 - 
+ - Modelo 01
+Ref: Big dog robot + Matrix octopus
 
-Textos
+ - Modelo 02
 
-_ Openning texts
+Telas
 
-1. Welcome to Last man Standing
-2. Try to survive
-3. Run for your life
+_ Openning
+1. Tela branca;
+2. Barra de loading;
+3. O logo do studio aparece de uma vez (com um som a definir) e dura por 4 segundos e some em seguida;
+   *Link para o blog que será desenvolvido
+4. Texto 1 aparece e dura 3 segundos; 
+5. Texto 2 aparece do alfa 0% ao 100% em 1 segundos e some em 2 segundos do alfa 100% ao 0%;
+6. O logo do game surge lentamente por 3 segundos.
+7. Texto 3 aparece do alfa 0% ao 100% em 1 segundos e some em 2 segundos do alfa 100% ao 0%;
 
-_ Menu texts
+__ Texts
+1. Tap for skip
+2. Welcome to Last man Standing
+3. Try to survive
 
-1. STORY
-2. SURVIVAL
-3. ACHIEVEMENTS
-4. HIGHSCORE
-5. OPTIONS
-6. CREDITS
-7. © 2014 Trapmaker Entertainment. All Rights Reserved.
+_ Menu
+1. Essa tela é uma continuação da tela de Openning, possuindo o logo;
+2. O botão de play surge piscando como nos jogos classicos de arcade;
+3. Uma área para publicidade será reservada e indicada na tela.
 
-_ InGame texts
+__ Texts
+1. PLAY (botão)
+2. © 2014 Trapmaker Entertainment. All Rights Reserved.
 
-Textos aparecem como legenda em preto com uma voz robótica
+_ InGame
+1. O game começa com um contador regressivo, centralizado na arena, do 3 para o 1 e GO!
+2. O texto 1 surge e dura 2 segundo na área de legenda;
+3. O texto 2 surge depois que o char se aproxima de um obstáculo; (só 1 vez)
+4. O texto 3 surge após pular um obstáculo de parede; (só 1 vez)
+5. O texto 4 surge após pular um obstáculo de buraco. (só 1 vez)
+
+__ texts
+
+Textos aparecem como legenda em preto com uma voz robótica.
 
 1. ...and the game begins!
-2. keep running!
-3. don't fall!
-4. go forward >>
+2. jump!
+3. keep running!
+4. don't fall!
 
-_ Score texts
+_ Score
+1. A tela de score surge depois de 1 segundos que o player perde;
+2. 
 
-1. SCORE
+__ Texts
+1. GAME OVER
 2. TIME
 3. 00:00
 4. 2000pts
-5. ACHIEVEMENTS
 
 Mecânica
 
 _ Controles
 
-Setas - Correr Espaço - Pular
+Setas - Correr
+Espaço - Pular
 
 _ Objetivos
 
@@ -145,39 +114,15 @@ Colidir com um inimigo Cair em uma armadilha
 
 Level Design
 
-_ mob 01
+_ mob_01
+speed 7,5 - Segue o player 
 
-speed 7,5
-
-_ Story mode
-
-__ Stage 1
-
-Tempo - 60 segundos
-ND - 1 mob/2s e 1 armadilha/10s
-
-As armadilhas aparecem e somem com o aparecer da outra armadilha (10s)
-
-O corredor começa caindo na arena - termina com o portão abrindo
-
-__ Stage 2
-
-Tempo - 60 segundos ND - 1 armadilha/2s e 1 mob/5s
-
-O portão fecha e ele está em um corredor cheio de obstáculos - termina com outro portão
-
-__ Stage 3
-
-Tempo - até encontrar a saida ND - mobs e armadilhas pré definidos por tile,
-mobs e armadilhas ativam quando entra no tile Boss - o boss precisa colidir com 10 armadilhas pra poder morrer,
-tem IA pra caçar o player ativo desde o começo e não ativa armadilha nem mobs.
-
-Entrada do labirinto - encontro com o miniaturo - boss fight - The End
+_ mob_02
+speed 9 - Tambem segue o player, mas possui maior angulo de giro em curvas, como uma carroça de cavalos. (lembrando o bug em que o mob ficava orbitando o player)
 
 _ Survival mode
 
-Nesse modo o jogo se passa nos 2 primeiros estágios do story mode em loop.
+Nesse modo o jogo se passa em uma arena onde os mobs surgem vindos do lado de fora da área de jogo.
 
-60s-stg1 - 60s-stg2 > 80s-stg1 - 80s-stg2 … de 20 em 20 segundos de acréscimo.
-
-
+A cada 2 segundos um novo mob 01 e o 4º mob a surgir será um mob 02;
+A cada 10 segundos um novo obstáculo aleatório surge e não aparece novo mob. 
