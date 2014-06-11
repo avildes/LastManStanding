@@ -4,10 +4,10 @@ using System.Collections;
 public class GoToLevelScript : MonoBehaviour
 {
 
-	public int levelNumberInBuild;
+	public string level;
 
 	void OnTouchDown()
 	{
-		Application.LoadLevel(levelNumberInBuild);
+		Application.LoadLevel(level);
 	}
 }

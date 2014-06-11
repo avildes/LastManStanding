@@ -224,6 +224,7 @@ GameObject:
   - 4: {fileID: 773317979}
   - 212: {fileID: 773317978}
   - 61: {fileID: 773317977}
+  - 114: {fileID: 773317980}
   m_Layer: 0
   m_Name: BotaoCreditos
   m_TagString: Untagged
@@ -277,6 +278,18 @@ Transform:
   m_Children:
   - {fileID: 573073172}
   m_Father: {fileID: 0}
+--- !u!114 &773317980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 773317976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d080233813c2945c49fcf57677f00778, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: Credits
 --- !u!1 &793748502
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d080233813c2945c49fcf57677f00778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelNumberInBuild: 2
+  level: InGame
 --- !u!1 &1168095844
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d080233813c2945c49fcf57677f00778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelNumberInBuild: 2
+  level: 
 --- !u!212 &1168095846
 SpriteRenderer:
   m_ObjectHideFlags: 0
