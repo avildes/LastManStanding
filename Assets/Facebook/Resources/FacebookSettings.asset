@@ -13,12 +13,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedAppIndex: 0
   appIds:
-  - 238694589662866
+  - '238694589662866 '
   appLabels:
-  - lastmanstanding
+  - "LastManStanding\t\r\nLast\xADM\xADa\xADn\xADS\xADt\xADa\xADn\xADding"
   cookie: 1
   logging: 1
   status: 1
   xfbml: 0
-  frictionlessRequests: 1
+  frictionlessRequests: 0
   iosURLSuffix: 

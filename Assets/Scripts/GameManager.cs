@@ -3,22 +3,18 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-    private GameManager Instance;
-
     void Awake()
     {
-        if(this.Instance == null)
-        {
-            //Error
-        }
-        Instance = this;
+        FacebookManager.Instance.FacebookInitiated += OnFacebookInitiated;
+        FacebookManager.Instance.FacebookDataRetrieved += OnFacebookDataRetrieved;
+
+        FacebookManager.Instance.Init();
 
         DontDestroyOnLoad(this);
     }
 
 	void Start ()
     {
-	
 	}
 	
 	// Update is called once per frame
@@ -27,13 +23,11 @@ public class GameManager : MonoBehaviour {
 	
 	}
 
-    void TryFacebookLogin()
+    void OnFacebookInitiated()
     {
-        FacebookManager.TryFacebookLogin();
     }
 
-    void FacebookInit()
+    void OnFacebookDataRetrieved()
     {
-        FacebookManager.InitFacebook();
     }
 }
