@@ -9,7 +9,7 @@ public class PlayerScript : MonoBehaviour
 	/// <summary>
 	/// Velocidade do player
 	/// </summary>
-	public int speed = 8;
+	public int speed = 2;
 	
     /// <summary>
     /// Texto usado para mostrar o tempo final
@@ -115,7 +115,7 @@ public class PlayerScript : MonoBehaviour
 
 		if(Input.GetKeyDown(KeyCode.R))
 		{
-			Application.LoadLevel(2);
+			Application.LoadLevel("Game");
 		}
 	}
 
@@ -159,7 +159,7 @@ public class PlayerScript : MonoBehaviour
 		if(alive)
 		{
 			totalTime = TimerScript.Instance.GetTotalTime();
-			endTimeText.text = string.Format("TIME {0:f2}", totalTime);
+			endTimeText.text = string.Format("{0:f2}", totalTime);
 			//Destroy(this);
 			alive = false;
 		}
@@ -184,11 +184,11 @@ public class PlayerScript : MonoBehaviour
     private IEnumerator JumpCoroutine()
     {
         isJumping = true;
-        renderer.material.color = new Color(0, 255, 255);
         
+        renderer.material.color = new Color(255, 0, 0);
         yield return new WaitForSeconds(0.5f);
         
         isJumping = false;
-        renderer.material.color = new Color(255, 0, 0);
+        renderer.material.color = new Color(255, 255, 255);
     }
 }

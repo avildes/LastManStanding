@@ -5,6 +5,8 @@ TagManager:
   tags:
   - Trap
   - 
+  - Enemy
+  - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
   Builtin Layer 2: Ignore Raycast
@@ -38,7 +40,19 @@ TagManager:
   User Layer 30: 
   User Layer 31: 
   m_SortingLayers:
+  - name: Background
+    userID: 1
+    uniqueID: 139698769
+    locked: 0
   - name: Default
     userID: 0
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    userID: 2
+    uniqueID: 2859572667
+    locked: 0
+  - name: HUD
+    userID: 3
+    uniqueID: 1448208965
     locked: 0
