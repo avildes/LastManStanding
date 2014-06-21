@@ -1,0 +1,46 @@
+Tela de Loading
+- Layout (arte)
+- Barra de loading (arte e animação)
+- Background (arte)
+- Integração com facebook (dev)
+Tela de Error
+- Layout (arte)
+- Background (arte)
+- Btn_voltar ou reload (arte)
+- Codigo (dev)
+- Códigos para os botões (dev)
+Tela de Menu
+- Layout (arte)
+- Logo (arte)
+- Tipografia (arte)
+- Background (arte)
+- Btn_play (arte)
+- Btn_Score (arte)
+- Códigos para os botões (dev)
+- Carregar Score
+Tela de Score
+- Layout (arte)
+- Background (arte)
+- Btn_voltar (arte)
+- Btn_amigos e geral (arte)
+- Carregar scores [amigos e geral] (dev)
+- Códigos para os botões (dev)
+- Carregar infos do fb [avatar e nomes] (dev)
+Tela de fim de jogo
+- Background (arte)
+- Layout (arte)
+- Btn_ok (arte)
+- Btn_retry (arte)
+- Carregar Score (dev)
+- Códigos para os botões (dev)
+Tela de Jogo
+- Background (arte)
+- Layout (arte)
+- Sprite player (arte)
+- Sprite Enemy (arte)
+- Sprite Trap (arte)
+- Carregar Score (dev)
+- Contador (dev)
+- Mecânica (dev)
+
+ps.: O jogo nao tem pause
