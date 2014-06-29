@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d080233813c2945c49fcf57677f00778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 
+  level: Menu
 --- !u!212 &1905887812
 SpriteRenderer:
   m_ObjectHideFlags: 0
