@@ -6,13 +6,15 @@ TagManager:
   - Trap
   - 
   - Enemy
+  - Play_Btn
+  - Score_Btn
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
   Builtin Layer 2: Ignore Raycast
   Builtin Layer 3: 
   Builtin Layer 4: Water
-  Builtin Layer 5: 
+  Builtin Layer 5: UI
   Builtin Layer 6: 
   Builtin Layer 7: 
   User Layer 8: TouchInputMask
@@ -40,6 +42,14 @@ TagManager:
   User Layer 30: 
   User Layer 31: 
   m_SortingLayers:
+  - name: Bg2
+    userID: 4
+    uniqueID: 1818360065
+    locked: 0
+  - name: Bg1
+    userID: 5
+    uniqueID: 2047892419
+    locked: 0
   - name: Background
     userID: 1
     uniqueID: 139698769

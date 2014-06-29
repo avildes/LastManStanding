@@ -88,5 +88,5 @@ public class FacebookManager
     }
 }
 
-delegate void FacebookInitiatedHandler();
-delegate void FacebookDataRetrievedHandler();
+public delegate void FacebookInitiatedHandler();
+public delegate void FacebookDataRetrievedHandler();
