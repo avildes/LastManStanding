@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour {
 
     void Awake()
     {
+		Application.ExternalCall("OnUnityLoaded");
+
         FacebookManager.Instance.FacebookInitiated += OnFacebookInitiated;
         FacebookManager.Instance.FacebookDataRetrieved += OnFacebookDataRetrieved;
 
