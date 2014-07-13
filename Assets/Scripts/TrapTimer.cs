@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TrapTimer : MonoBehaviour {
-
+public class TrapTimer : MonoBehaviour
+{
     public float TrapLifeTime;
 
 	// Use this for initialization

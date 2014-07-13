@@ -14,16 +14,30 @@ public class Spawner : MonoBehaviour {
 	public float boundsY1 = 9f;
 	public float boundsY2 = -7f;
 
+    private bool _ativo;
+
+    void onSetAtivo(bool ativo)
+    {
+        _ativo = ativo;
+    }
+
 	// Use this for initialization
 	void Start ()
 	{
-		StartCoroutine(SpawnMob());
-        StartCoroutine(SpawnTrap());
+        GameController.onSetAtivo += onSetAtivo;
+		//StartCoroutine(SpawnMob());
+        //StartCoroutine(SpawnTrap());
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+        if(_ativo)
+        {
+            StartCoroutine(SpawnMob());
+            StartCoroutine(SpawnTrap());
+            _ativo = false;
+        }
 	}
 
 	IEnumerator SpawnMob()

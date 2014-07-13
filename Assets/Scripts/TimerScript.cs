@@ -3,23 +3,15 @@ using System.Collections;
 
 public class TimerScript : MonoBehaviour
 {
-	public static TimerScript Instance;
-
 	private float _totalTime;
 
-	void Awake()
-	{
-		// Register the singleton
-		if (Instance != null)
-		{
-			Debug.LogError("Multiple instances of SoundEffectsHelper!");
-		}
-		Instance = this;
-	}
+    public bool _ativo;
 
 	// Use this for initialization
 	void Start ()
 	{
+        GameController.onSetAtivo += onSetAtivo;
+
 		_totalTime = 0;
 		guiText.text = "0''00";
 	}
@@ -27,12 +19,20 @@ public class TimerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		_totalTime += Time.deltaTime;
-		guiText.text = string.Format("{0}''{1}{2}", (int) _totalTime, ((int)(_totalTime * 10)) % 10, ((int)(_totalTime * 100)) % 10);
+        if(_ativo)
+        {
+		    _totalTime += Time.deltaTime;
+		    guiText.text = string.Format("{0}''{1}{2}", (int) _totalTime, ((int)(_totalTime * 10)) % 10, ((int)(_totalTime * 100)) % 10);
+        }
 	}
 
 	public float GetTotalTime()
 	{
 		return _totalTime;
 	}
+
+    void onSetAtivo(bool ativo)
+    {
+        _ativo = ativo;
+    }
 }

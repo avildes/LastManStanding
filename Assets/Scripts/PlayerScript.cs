@@ -37,8 +37,19 @@ public class PlayerScript : MonoBehaviour
     private float totalTime;
 
 	private bool alive = true;
+    private bool _ativo = false;
 
 	public Joystick joystick;
+
+    void Start()
+    {
+        GameController.onSetAtivo += onSetAtivo;
+    }
+
+    void onSetAtivo(bool ativo)
+    {
+        _ativo = ativo;
+    }
 
 	float joyStickInput (Joystick joy)
 	{
@@ -67,10 +78,11 @@ public class PlayerScript : MonoBehaviour
 
 	void Update()
 	{
-		if(alive)
+		if(alive && _ativo)
 		{
 			// Recupera o input do jogador
-			float inputX, inputY;
+			float inputX = 0;
+            float inputY = 0;
 
 			if(Input.GetAxis("Horizontal")  != 0)
 			{
@@ -78,7 +90,7 @@ public class PlayerScript : MonoBehaviour
 			}
 			else
 			{
-				inputX = CheckJoystickAxis(joystick.position.x);
+				//inputX = CheckJoystickAxis(joystick.position.x);
 			}
 
 			if(Input.GetAxis("Vertical")  != 0)
@@ -87,7 +99,7 @@ public class PlayerScript : MonoBehaviour
 			}
 			else
 			{
-				inputY = CheckJoystickAxis(joystick.position.y);
+				//inputY = CheckJoystickAxis(joystick.position.y);
 			}
 
 
@@ -158,9 +170,9 @@ public class PlayerScript : MonoBehaviour
     {
 		if(alive)
 		{
-			totalTime = TimerScript.Instance.GetTotalTime();
-			endTimeText.text = string.Format("{0:f2}", totalTime);
-			//Destroy(this);
+			//totalTime = TimerScript.Instance.GetTotalTime();
+			//endTimeText.text = string.Format("{0:f2}", totalTime);
+			Destroy(gameObject);
 			alive = false;
 		}
     }
