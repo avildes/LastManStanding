@@ -37,7 +37,7 @@ public class FollowPlayer : MonoBehaviour
 
     IEnumerator Die()
     {
-        onMobDie();
+        //onMobDie();
 
         gameObject.GetComponent<AudioSource>().Play();
 
@@ -45,7 +45,7 @@ public class FollowPlayer : MonoBehaviour
 
         GameManager.MobKilled();
 
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     public delegate void MobHandler();

@@ -39,7 +39,7 @@ public class PlayerScript : MonoBehaviour
 	private bool alive = true;
     private bool _ativo = false;
 
-	public Joystick joystick;
+	//public Joystick joystick;
 
     void Start()
     {
@@ -50,7 +50,7 @@ public class PlayerScript : MonoBehaviour
     {
         _ativo = ativo;
     }
-
+    /*
 	float joyStickInput (Joystick joy)
 	{
 		Vector2 absJoyPos = new Vector2 (Mathf.Abs(joy.position.x),
@@ -59,6 +59,7 @@ public class PlayerScript : MonoBehaviour
 		float yDirection = (joy.position.y > 0) ? 1 : -1;
 		return ( ( absJoyPos.x > absJoyPos.y) ? absJoyPos.x * xDirection : absJoyPos.y * yDirection);
 	}
+    */
 
 	float CheckJoystickAxis(float value)
 	{
@@ -172,7 +173,7 @@ public class PlayerScript : MonoBehaviour
 		{
 			//totalTime = TimerScript.Instance.GetTotalTime();
 			//endTimeText.text = string.Format("{0:f2}", totalTime);
-			Destroy(gameObject);
+			//Destroy(gameObject);
 			alive = false;
 		}
     }
