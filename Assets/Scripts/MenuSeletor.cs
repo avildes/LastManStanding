@@ -45,7 +45,6 @@ public class MenuSeletor : MonoBehaviour
                 );
 
         selecao = MENU.PLAY;
-
     }
 
 

@@ -34,6 +34,11 @@ public class GameController : MonoBehaviour
         gameElementsAnimator = gameElements.GetComponent < Animator >();
         StartCoroutine(StartGame());
 	}
+
+	void Update()
+	{
+		Debug.Log(musicSource);
+	}
 	
 	IEnumerator StartGame()
     {

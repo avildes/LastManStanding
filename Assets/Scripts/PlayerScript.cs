@@ -137,7 +137,7 @@ public class PlayerScript : MonoBehaviour
 			Application.LoadLevel("Game");
 		}
 
-        if (Input.GetKey("joystick button 6"))
+        if (Input.GetKey("joystick button 6") || Input.GetKeyDown(KeyCode.Space))
         {
             Application.LoadLevel("Menu");
         }
