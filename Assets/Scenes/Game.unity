@@ -1086,6 +1086,7 @@ MonoBehaviour:
   finalScoreObject: {fileID: 84692808}
   finalScoreValueObject: {fileID: 1770659206}
   finalTimeValueObject: {fileID: 543555933}
+  bestScoreValueObject: {fileID: 1696692595}
 --- !u!4 &1143109830
 Transform:
   m_ObjectHideFlags: 0
@@ -1917,7 +1918,7 @@ GameObject:
   - 4: {fileID: 1696692596}
   - 132: {fileID: 1696692597}
   m_Layer: 0
-  m_Name: BestTimeValue
+  m_Name: BestScoreValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

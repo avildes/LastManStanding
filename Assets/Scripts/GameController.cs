@@ -25,6 +25,9 @@ public class GameController : MonoBehaviour
 	public GameObject finalTimeValueObject;
 	private GUIText finalTimeValue;
 
+	public GameObject bestScoreValueObject;
+	private GUIText bestScoreValue;
+
     //-----EVENT MANAGER-----
     public delegate void GameHandler(bool ativo);
     public static event GameHandler onSetAtivo;
@@ -108,5 +111,16 @@ public class GameController : MonoBehaviour
 
 		finalTimeValue = finalTimeValueObject.GetComponent<GUIText>();
 		finalTimeValue.text = this._time;
+
+		int highScore = PersistenceHelper.ReadInteger(PersistenceHelper.HIGHSCORE_KEY);
+
+		if (_points > highScore)
+		{
+			highScore = _points;
+			PersistenceHelper.PersistInteger(PersistenceHelper.HIGHSCORE_KEY, highScore);
+		}
+
+		bestScoreValue = bestScoreValueObject.GetComponent<GUIText>();
+		bestScoreValue.text = highScore + "";
     }
 }
