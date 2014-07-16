@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
 
 	void Update()
 	{
-		Debug.Log(musicSource);
+
 	}
 	
 	IEnumerator StartGame()
@@ -60,11 +60,12 @@ public class GameController : MonoBehaviour
 
     void onPlayerDeath()
     {
+		PlayerScript.onPlayerDeath -= onPlayerDeath;
         musicSource.Stop();
 
         source.PlayOneShot(end_game);
         gameElementsAnimator.SetTrigger("End");
-
+		
         onSetAtivo(false);
         StartCoroutine(ShowFinalScore());
     }
