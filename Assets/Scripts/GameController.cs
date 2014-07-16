@@ -72,7 +72,7 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(.75f);
         source.PlayOneShot(start_game);
         onSetAtivo(true);
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1.6f);
         musicSource.Play();
     }
 

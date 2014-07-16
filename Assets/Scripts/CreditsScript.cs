@@ -7,6 +7,8 @@ public class CreditsScript : MonoBehaviour
 
     private AudioSource audioSource;
 
+    private bool playOnce = true;
+
     void Start()
     {
 		audioSource = gameObject.GetComponent<AudioSource>();
@@ -14,9 +16,10 @@ public class CreditsScript : MonoBehaviour
 
     void Update ()
     {
-        if (Input.anyKey)
+        if (Input.anyKey && playOnce)
         {
-			audioSource.PlayOneShot(buttonSound);
+            playOnce = false;
+			audioSource.PlayOneShot(buttonSound, 1);
             StartCoroutine(LoadMenu());
         }
 	}
