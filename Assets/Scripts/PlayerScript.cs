@@ -32,6 +32,11 @@ public class PlayerScript : MonoBehaviour
     private bool isJumping;
 
     /// <summary>
+    /// Flag que indica se o player esta no dash
+    /// </summary>
+    private bool isDashing;
+
+    /// <summary>
     /// Tempo total de jogo
     /// </summary>
     private float totalTime;
@@ -125,19 +130,19 @@ public class PlayerScript : MonoBehaviour
             movement = new Vector2(0, 0);
         }*/
 
-        	if (Input.GetKeyDown(KeyCode.Space))
+        	if (Input.GetKey("joystick button 0"))
         	{
 //	            jumpMomentVector = new Vector2(inputX, inputY);
-				PressedJumpButton();
+				PressedDashButton();
         	}
 		}
 	}
 
-	void PressedJumpButton()
+    void PressedDashButton()
 	{
-		if(!isJumping)
+		if(!isDashing)
 		{
-			StartCoroutine(JumpCoroutine());
+			StartCoroutine(DashCoroutine());
 		}
 	}
 
@@ -201,6 +206,29 @@ public class PlayerScript : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         
         isJumping = false;
+        renderer.material.color = new Color(255, 255, 255);
+    }
+
+
+    /// <summary>
+    /// Corotina de dash
+    /// </summary>
+    private IEnumerator DashCoroutine()
+    {
+        isDashing = true;
+
+        this.speed += 2;
+        renderer.material.color = Color.blue;//new Color(255, 0, 0);
+        
+        yield return new WaitForSeconds(.5f);
+
+
+        renderer.material.color = Color.cyan;//new Color(255, 0, 0);
+        this.speed -= 2;
+
+        yield return new WaitForSeconds(5f);
+
+        isDashing = false;
         renderer.material.color = new Color(255, 255, 255);
     }
 }
