@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public GameObject scoreObject;
     private ScoreScript scoreClass;
     private int _points = 0;
+	private string _time;
 
     private AudioSource source;
     public AudioSource musicSource;
@@ -21,9 +22,15 @@ public class GameController : MonoBehaviour
     public GameObject finalScoreValueObject;
     private GUIText finalScoreValue;
 
+	public GameObject finalTimeValueObject;
+	private GUIText finalTimeValue;
+
     //-----EVENT MANAGER-----
     public delegate void GameHandler(bool ativo);
     public static event GameHandler onSetAtivo;
+
+	public delegate void LoadSceneHandler();
+	public static event LoadSceneHandler onLoadNewScene;
     //-----------------------
 	
     void Start ()
@@ -39,15 +46,23 @@ public class GameController : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.R) || Input.GetKey("joystick button 1"))
 		{
-			Application.LoadLevel("Game");
+			Load("Game");
 		}
 		
 		if (Input.GetKey("joystick button 6") || Input.GetKeyDown(KeyCode.Space))
 		{
-			Application.LoadLevel("Menu");
+			Load("Menu");
 		}
 	}
-	
+
+	void Load(string level)
+	{
+		PlayerScript.onPlayerDeath -= onPlayerDeath;
+
+		onLoadNewScene();
+		Application.LoadLevel(level);
+	}
+
 	IEnumerator StartGame()
     {
         //gameElementsAnimator.SetTrigger("Start");
@@ -66,6 +81,11 @@ public class GameController : MonoBehaviour
         this._points = points;
     }
 
+	public void SetTime(string time)
+	{
+		this._time = time;
+	}
+
     void onPlayerDeath()
     {
 		PlayerScript.onPlayerDeath -= onPlayerDeath;
@@ -81,9 +101,12 @@ public class GameController : MonoBehaviour
     IEnumerator ShowFinalScore()
     {
         yield return new WaitForSeconds(.7f);
+		
+		finalScoreObject.SetActive(true);
+		finalScoreValue = finalScoreValueObject.GetComponent<GUIText>();
+		finalScoreValue.text = this._points+"";
 
-        finalScoreObject.SetActive(true);
-        finalScoreValue = finalScoreValueObject.GetComponent<GUIText>();
-        finalScoreValue.text = this._points+"";
+		finalTimeValue = finalTimeValueObject.GetComponent<GUIText>();
+		finalTimeValue.text = this._time;
     }
 }

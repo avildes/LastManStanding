@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour {
 	public GameObject mob;
     public GameObject trap;
 
-    public float trapSpawnTime = 10;
+    public float trapSpawnTime = 12f;
     public float mobSpawnTime = 2;
 
 	public float boundsX1 = 19f;
@@ -17,6 +17,8 @@ public class Spawner : MonoBehaviour {
     private bool _ativo = false;
     private bool oneTime = true;
 
+	private GameObject player;
+
     void onSetAtivo(bool ativo)
     {
         _ativo = ativo;
@@ -25,6 +27,8 @@ public class Spawner : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
+		player = GameObject.FindGameObjectWithTag("Player");
+
         GameController.onSetAtivo += onSetAtivo;
 		//StartCoroutine(SpawnMob());
         //StartCoroutine(SpawnTrap());
@@ -43,20 +47,26 @@ public class Spawner : MonoBehaviour {
 
 	IEnumerator SpawnMob()
 	{
-		Instantiate(mob, GetRandomBoundsPosition(), Quaternion.identity);
+		yield return new WaitForSeconds(mobSpawnTime);
 
-        yield return new WaitForSeconds(mobSpawnTime);
+		if (_ativo)
+		{
+			Instantiate(mob, GetRandomBoundsPosition(), Quaternion.identity);
 
-        if (_ativo) StartCoroutine(SpawnMob());
+        	StartCoroutine(SpawnMob());
+		}
 	}
 
     IEnumerator SpawnTrap()
     {
-        Instantiate(trap, GetRandomPosition(), Quaternion.identity);
+		yield return new WaitForSeconds(trapSpawnTime);
         
-        yield return new WaitForSeconds(trapSpawnTime);
+		if(_ativo)
+		{
+			Instantiate(trap, GetRandomPosition(), Quaternion.identity);
         
-        if(_ativo) StartCoroutine(SpawnTrap());
+        	StartCoroutine(SpawnTrap());
+		}
     }
 
     Vector3 GetRandomPosition()
@@ -75,36 +85,39 @@ public class Spawner : MonoBehaviour {
 
         Vector3 vector = new Vector3(0, 0, 0);
 
-		if (orientation < 0)  //Vertical - left, right
-        {
-            vector.y = Random.Range(boundsY2, boundsY1);
+		do
+		{
+			if (orientation < 0)  //Vertical - left, right
+	        {
+	            vector.y = Random.Range(boundsY2, boundsY1);
 
-            orientation = Random.Range (-1.0F, 1.0F); // Check if it is X1 or X2 (leftOrRight)
+	            orientation = Random.Range (-1.0F, 1.0F); // Check if it is X1 or X2 (leftOrRight)
 
-            if(orientation < 0) // X1 left
-            {
-                vector.x = boundsX1;
-            }
-            else // X2 right
-            {
-                vector.x = boundsX2;
-            }
-        }
-        else  // Horizontal - top, bot
-        {
-            vector.x = Random.Range(boundsX2, boundsX1);
+	            if(orientation < 0) // X1 left
+	            {
+	                vector.x = boundsX1;
+	            }
+	            else // X2 right
+	            {
+	                vector.x = boundsX2;
+	            }
+	        }
+	        else  // Horizontal - top, bot
+	        {
+	            vector.x = Random.Range(boundsX2, boundsX1);
 
-            orientation = Random.Range (-1.0F, 1.0F); // Check if it is Y1 or Y2 (topOrBot)
-            
-            if(orientation < 0) // Y1 Top
-            {
-                vector.y = boundsY1;
-            }
-            else // Y2 Bot
-            {
-                vector.y = boundsY2;
-            }
-        }
+	            orientation = Random.Range (-1.0F, 1.0F); // Check if it is Y1 or Y2 (topOrBot)
+	            
+	            if(orientation < 0) // Y1 Top
+	            {
+	                vector.y = boundsY1;
+	            }
+	            else // Y2 Bot
+	            {
+	                vector.y = boundsY2;
+	            }
+	        }
+		} while (Vector3.Distance(vector, player.transform.position) < .2f);
         return vector;
 	}
 }

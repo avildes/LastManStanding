@@ -158,10 +158,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (collider.gameObject.tag == "Trap")
         {
-            if(!isJumping)
-            {
-                OnPlayerDeath();
-            }
+        	OnPlayerDeath();
         }
     }
 

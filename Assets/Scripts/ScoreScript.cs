@@ -18,9 +18,17 @@ public class ScoreScript : MonoBehaviour {
 
         PlusScoreScript.onPointsChange += onPointsChange;
         GameController.onSetAtivo += onSetAtivo;
+		GameController.onLoadNewScene += onLoadNewScene;
 
 		_totalTime = 0;
 		guiText.text = "0000";
+	}
+
+	void onLoadNewScene()
+	{
+		PlusScoreScript.onPointsChange -= onPointsChange;
+		GameController.onSetAtivo -= onSetAtivo;
+		GameController.onLoadNewScene -= onLoadNewScene;
 	}
 	
 	// Update is called once per frame
@@ -35,12 +43,8 @@ public class ScoreScript : MonoBehaviour {
                 _totalScore += 2;
                 _totalTime = 0;
             }
-
-            controller.SetPoints(_totalScore);
-
         }
-       
-		    guiText.text = _totalScore+"";
+		guiText.text = _totalScore+"";
 	}
 
 	public float GetTotalTime()
@@ -51,6 +55,11 @@ public class ScoreScript : MonoBehaviour {
     void onSetAtivo(bool ativo)
     {
         _ativo = ativo;
+
+		if(!ativo)
+		{
+			controller.SetPoints(_totalScore);
+		}
     }
 
     public int GetFinalScore()

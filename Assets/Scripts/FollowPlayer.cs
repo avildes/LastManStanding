@@ -20,9 +20,10 @@ public class FollowPlayer : MonoBehaviour
 
     void Start()
     {
-        GameController.onSetAtivo += onSetAtivo;
+		GameController.onSetAtivo += onSetAtivo;
 
         alive = true;
+		_ativo = true;
         target = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -45,18 +46,13 @@ public class FollowPlayer : MonoBehaviour
 
 	void onSetAtivo(bool ativo)
 	{
+		_ativo = ativo;
 		if (!ativo)
 		{
+			alive = false;
 			GameController.onSetAtivo -= onSetAtivo;
 			Destroy(gameObject);
 		}
-	}
-	
-	IEnumerator Destruir()
-	{
-		GameController.onSetAtivo -= onSetAtivo;
-		yield return new WaitForSeconds(.1f);
-		Destroy(gameObject);
 	}
 
     IEnumerator Die()
@@ -68,6 +64,7 @@ public class FollowPlayer : MonoBehaviour
 
         yield return new WaitForSeconds(.1f);
 
+		GameController.onSetAtivo -= onSetAtivo;
         Destroy(gameObject);
     }
 }

@@ -7,10 +7,16 @@ public class TimerScript : MonoBehaviour
 
     public bool _ativo;
 
+	private string _totalTimeFormatted;
+
+	private GameController controller;
+
 	// Use this for initialization
 	void Start ()
 	{
         GameController.onSetAtivo += onSetAtivo;
+
+		controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
 		_totalTime = 0;
 		guiText.text = "0''00";
@@ -22,7 +28,9 @@ public class TimerScript : MonoBehaviour
         if(_ativo)
         {
 		    _totalTime += Time.deltaTime;
-		    guiText.text = string.Format("{0}''{1}{2}", (int) _totalTime, ((int)(_totalTime * 10)) % 10, ((int)(_totalTime * 100)) % 10);
+
+			_totalTimeFormatted = string.Format("{0}''{1}{2}", (int) _totalTime, ((int)(_totalTime * 10)) % 10, ((int)(_totalTime * 100)) % 10);
+		    guiText.text = _totalTimeFormatted;
         }
 	}
 
@@ -34,5 +42,10 @@ public class TimerScript : MonoBehaviour
     void onSetAtivo(bool ativo)
     {
         _ativo = ativo;
+
+		if (!ativo)
+		{
+			controller.SetTime(_totalTimeFormatted);
+		}
     }
 }

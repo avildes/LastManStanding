@@ -26,7 +26,7 @@ public class MenuSeletor : MonoBehaviour
     private GameObject score_btn;
 
     private string gameLevel = "Game";
-    private string scoreLevel = "Score";
+    private string creditsLevel = "Credits";
 
 
     void Start()
@@ -89,7 +89,7 @@ public class MenuSeletor : MonoBehaviour
                         StartCoroutine(Load(gameLevel));
                         break;
                     case MENU.SCORE:
-                        StartCoroutine(Load(scoreLevel));
+                        StartCoroutine(Load(creditsLevel));
                         break;
                 }
             }

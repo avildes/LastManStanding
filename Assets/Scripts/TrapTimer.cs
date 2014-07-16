@@ -5,10 +5,20 @@ public class TrapTimer : MonoBehaviour
 {
     public float TrapLifeTime;
 
-	// Use this for initialization
+	private float timer = 8f;
+
+	private Animator animator;
+	private Collider2D collider;
+
 	void Start ()
     {
         GameController.onSetAtivo += onSetAtivo;
+
+		animator = gameObject.GetComponent<Animator>();
+		collider = gameObject.GetComponent<PolygonCollider2D>();
+		collider.enabled = false;
+
+		StartCoroutine(OnTrapAnimationEnterEnded());
 
         StartCoroutine(Timer());
 	}
@@ -21,17 +31,24 @@ public class TrapTimer : MonoBehaviour
 			Destroy(gameObject);
         }
     }
+
+	IEnumerator OnTrapAnimationEnterEnded()
+	{
+		yield return new WaitForSeconds(.75f);
+		collider.enabled = true;
+	}
 	
 	IEnumerator Timer()
 	{
-		yield return new WaitForSeconds(10);
-		Destroy(gameObject);
-	}
-
-	IEnumerator Destruir()
-	{
+		yield return new WaitForSeconds(timer);
+		
 		GameController.onSetAtivo -= onSetAtivo;
-		yield return new WaitForSeconds(.1f);
+
+		animator.SetTrigger("Destroi");
+		collider.enabled = false;
+
+		yield return new WaitForSeconds(.75f);
+
 		Destroy(gameObject);
 	}
 }
