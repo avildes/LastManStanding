@@ -47,12 +47,12 @@ public class GameController : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.R) || Input.GetKey("joystick button 1"))
+		if (Input.GetKeyDown(KeyCode.R) || Input.GetKey("joystick button 5"))
 		{
 			Load("Game");
 		}
 		
-		if (Input.GetKey("joystick button 6") || Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKey("joystick button 4") || Input.GetKeyDown(KeyCode.E))
 		{
 			Load("Menu");
 		}

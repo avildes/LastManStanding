@@ -130,7 +130,7 @@ public class PlayerScript : MonoBehaviour
             movement = new Vector2(0, 0);
         }*/
 
-        	if (Input.GetKey("joystick button 0"))
+        	if (Input.GetKey("joystick button 0") || Input.GetKeyDown(KeyCode.Space))
         	{
 //	            jumpMomentVector = new Vector2(inputX, inputY);
 				PressedDashButton();
