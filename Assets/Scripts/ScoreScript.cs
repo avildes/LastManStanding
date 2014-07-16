@@ -3,15 +3,19 @@ using System.Collections;
 
 public class ScoreScript : MonoBehaviour {
 
-	private int _totalScore;
+	private int _totalScore = 0;
+    private float timeOffset = .1f;
     private float _totalTime;
 
-    public bool _ativo;
+    private GameController controller;
 
+    public bool _ativo;
 
 	// Use this for initialization
 	void Start ()
 	{
+        controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+
         PlusScoreScript.onPointsChange += onPointsChange;
         GameController.onSetAtivo += onSetAtivo;
 
@@ -26,10 +30,17 @@ public class ScoreScript : MonoBehaviour {
         {
 		    _totalTime += Time.deltaTime;
 
-            _totalScore += (int) _totalTime;
+            if (_totalTime > timeOffset)
+            {
+                _totalScore += 2;
+                _totalTime = 0;
+            }
 
-		    guiText.text = _totalScore+"";
+            controller.SetPoints(_totalScore);
+
         }
+       
+		    guiText.text = _totalScore+"";
 	}
 
 	public float GetTotalTime()
@@ -50,5 +61,11 @@ public class ScoreScript : MonoBehaviour {
     void onPointsChange(int points)
     {
         this._totalScore += points;
+    }
+
+    //TODO e se score estourar o int?
+    public int GetTotalScore()
+    {
+        return _totalScore;
     }
 }

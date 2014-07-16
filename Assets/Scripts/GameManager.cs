@@ -49,9 +49,4 @@ public class GameManager : MonoBehaviour
     {
        // MusicPlayer.stopMainMusic();
     }
-
-    public static void MobKilled()
-    {
-        points += 10;
-    }
 }

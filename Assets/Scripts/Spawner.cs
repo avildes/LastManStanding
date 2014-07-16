@@ -14,7 +14,8 @@ public class Spawner : MonoBehaviour {
 	public float boundsY1 = 9f;
 	public float boundsY2 = -7f;
 
-    private bool _ativo;
+    private bool _ativo = false;
+    private bool oneTime = true;
 
     void onSetAtivo(bool ativo)
     {
@@ -32,11 +33,11 @@ public class Spawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-        if(_ativo)
+        if(_ativo && oneTime)
         {
             StartCoroutine(SpawnMob());
             StartCoroutine(SpawnTrap());
-            _ativo = false;
+            oneTime = false;
         }
 	}
 
@@ -46,7 +47,7 @@ public class Spawner : MonoBehaviour {
 
         yield return new WaitForSeconds(mobSpawnTime);
 
-		StartCoroutine(SpawnMob());
+        if (_ativo) StartCoroutine(SpawnMob());
 	}
 
     IEnumerator SpawnTrap()
@@ -55,7 +56,7 @@ public class Spawner : MonoBehaviour {
         
         yield return new WaitForSeconds(trapSpawnTime);
         
-        StartCoroutine(SpawnTrap());
+        if(_ativo) StartCoroutine(SpawnTrap());
     }
 
     Vector3 GetRandomPosition()

@@ -11,8 +11,17 @@ public class FollowPlayer : MonoBehaviour
 
     private bool alive;
 
+    private bool _ativo;
+
+    //-----EVENT MANAGER-----
+    public delegate void MobHandler();
+    public static event MobHandler onMobDie;
+    //-----------------------
+
     void Start()
     {
+        GameController.onSetAtivo += onSetAtivo;
+
         alive = true;
         target = GameObject.FindGameObjectWithTag("Player");
     }
@@ -30,24 +39,25 @@ public class FollowPlayer : MonoBehaviour
     {
         if (collider.gameObject.tag == "Trap")
         {
-            alive = false;
             StartCoroutine(Die());
         }
     }
 
+    void onSetAtivo(bool ativo)
+    {
+        this._ativo = ativo;
+        //gameObject.SetActive(ativo);
+    }
+
     IEnumerator Die()
     {
-        //onMobDie();
+        onMobDie();
 
         gameObject.GetComponent<AudioSource>().Play();
+        alive = false;
 
         yield return new WaitForSeconds(.1f);
 
-        GameManager.MobKilled();
-
         Destroy(gameObject);
     }
-
-    public delegate void MobHandler();
-    public static event MobHandler onMobDie;
 }

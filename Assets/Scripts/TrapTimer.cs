@@ -8,8 +8,19 @@ public class TrapTimer : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        GameController.onSetAtivo += onSetAtivo;
+
         StartCoroutine(Timer());
 	}
+
+    void onSetAtivo(bool ativo)
+    {
+        /*
+        if (!ativo)
+        {
+            Destroy(gameObject);
+        }*/
+    }
 	
 	IEnumerator Timer()
     {

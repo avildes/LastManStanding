@@ -41,6 +41,12 @@ public class PlayerScript : MonoBehaviour
 
 	//public Joystick joystick;
 
+    //-----EVENT MANAGER-----
+    public delegate void PlayerHandler();
+    public static event PlayerHandler onPlayerDeath;
+    //-----------------------
+
+
     void Start()
     {
         GameController.onSetAtivo += onSetAtivo;
@@ -126,10 +132,16 @@ public class PlayerScript : MonoBehaviour
         	}
 		}
 
-		if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetKey("joystick button 1"))
 		{
 			Application.LoadLevel("Game");
 		}
+
+        if (Input.GetKey("joystick button 6"))
+        {
+            Application.LoadLevel("Menu");
+        }
+
 	}
 
 	void PressedJumpButton()
@@ -175,6 +187,7 @@ public class PlayerScript : MonoBehaviour
 			//endTimeText.text = string.Format("{0:f2}", totalTime);
 			//Destroy(gameObject);
 			alive = false;
+            onPlayerDeath();
 		}
     }
 
