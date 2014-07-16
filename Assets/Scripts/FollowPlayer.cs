@@ -43,11 +43,21 @@ public class FollowPlayer : MonoBehaviour
         }
     }
 
-    void onSetAtivo(bool ativo)
-    {
-        this._ativo = ativo;
-        //gameObject.SetActive(ativo);
-    }
+	void onSetAtivo(bool ativo)
+	{
+		if (!ativo)
+		{
+			GameController.onSetAtivo -= onSetAtivo;
+			Destroy(gameObject);
+		}
+	}
+	
+	IEnumerator Destruir()
+	{
+		GameController.onSetAtivo -= onSetAtivo;
+		yield return new WaitForSeconds(.1f);
+		Destroy(gameObject);
+	}
 
     IEnumerator Die()
     {

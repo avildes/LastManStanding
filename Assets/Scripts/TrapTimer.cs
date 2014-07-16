@@ -15,16 +15,23 @@ public class TrapTimer : MonoBehaviour
 
     void onSetAtivo(bool ativo)
     {
-        /*
         if (!ativo)
         {
-            Destroy(gameObject);
-        }*/
+			GameController.onSetAtivo -= onSetAtivo;
+			Destroy(gameObject);
+        }
     }
 	
 	IEnumerator Timer()
-    {
-        yield return new WaitForSeconds(10);
-        Destroy(gameObject);
-    }
+	{
+		yield return new WaitForSeconds(10);
+		Destroy(gameObject);
+	}
+
+	IEnumerator Destruir()
+	{
+		GameController.onSetAtivo -= onSetAtivo;
+		yield return new WaitForSeconds(.1f);
+		Destroy(gameObject);
+	}
 }

@@ -37,7 +37,15 @@ public class GameController : MonoBehaviour
 
 	void Update()
 	{
-
+		if (Input.GetKeyDown(KeyCode.R) || Input.GetKey("joystick button 1"))
+		{
+			Application.LoadLevel("Game");
+		}
+		
+		if (Input.GetKey("joystick button 6") || Input.GetKeyDown(KeyCode.Space))
+		{
+			Application.LoadLevel("Menu");
+		}
 	}
 	
 	IEnumerator StartGame()
