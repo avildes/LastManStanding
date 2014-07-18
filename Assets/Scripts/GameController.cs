@@ -106,6 +106,7 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(.7f);
 		
 		finalScoreObject.SetActive(true);
+
 		finalScoreValue = finalScoreValueObject.GetComponent<GUIText>();
 		finalScoreValue.text = this._points+"";
 

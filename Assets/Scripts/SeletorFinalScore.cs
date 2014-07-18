@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SeletorFinalScore : MonoBehaviour {
+public class SeletorFinalScore : MonoBehaviour
+{
 
     public AudioClip menu_enter;
     public AudioClip menu_select;
@@ -54,7 +55,7 @@ public class SeletorFinalScore : MonoBehaviour {
         seletorRetry.SetActive(retry);
     }
 
-	void Update ()
+    void Update()
     {
         if (!freezeControls)
         {
@@ -82,22 +83,33 @@ public class SeletorFinalScore : MonoBehaviour {
                 switch (selecao)
                 {
                     case RETRYMENU.MENU:
-                        StartCoroutine(Load(menuLevel));
+                        LoadLevel(menuLevel);
                         break;
                     case RETRYMENU.RETRY:
-                        StartCoroutine(Load(gameLevel));
+                        LoadLevel(gameLevel);
                         break;
                 }
             }
         }
-	}
+    }
 
     IEnumerator Load(string level)
     {
         source.PlayOneShot(menu_enter, 1);
         freezeControls = true;
+        GameObject.FindGameObjectWithTag("FinalScoreObject").GetComponent<Animator>().SetTrigger("ShutDown");
         //menuAnimator.SetTrigger("ShutDown");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.75f);
         Application.LoadLevel(level);
+    }
+
+    void LoadLevel(string level)
+    {
+        if (!freezeControls)
+        {
+            if (level.Equals("Game")) SetSeletores(false, true);
+            else if (level.Equals("Menu")) SetSeletores(true, false);
+            StartCoroutine(Load(level));
+        }
     }
 }

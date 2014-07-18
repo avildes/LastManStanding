@@ -17,7 +17,7 @@ public class MenuSeletor : MonoBehaviour
     private enum MENU
     {
         PLAY,
-        SCORE
+        CREDITS
     }
 
     private MENU selecao;
@@ -56,28 +56,16 @@ public class MenuSeletor : MonoBehaviour
             {
                 if (selecao != MENU.PLAY)
                 {
-                    gameObject.transform.position =
-                        new Vector3(
-                            gameObject.transform.position.x,
-                            play_btn.transform.position.y,
-                            gameObject.transform.position.z
-                            );
-                    selecao = MENU.PLAY;
+                    SetSeletor(MENU.PLAY);
                     source.PlayOneShot(menu_select, 1);
                 }
 
             }
             else if (Input.GetAxis("Vertical") < 0)
             {
-                if (selecao != MENU.SCORE)
+                if (selecao != MENU.CREDITS)
                 {
-                    gameObject.transform.position =
-                        new Vector3(
-                            gameObject.transform.position.x,
-                            score_btn.transform.position.y,
-                            gameObject.transform.position.z
-                            );
-                    selecao = MENU.SCORE;
+                    SetSeletor(MENU.CREDITS);
                     source.PlayOneShot(menu_select, 1);
                 }
             }
@@ -86,10 +74,10 @@ public class MenuSeletor : MonoBehaviour
                 switch (selecao)
                 {
                     case MENU.PLAY:
-                        StartCoroutine(Load(gameLevel));
+                        LoadLevel(gameLevel);
                         break;
-                    case MENU.SCORE:
-                        StartCoroutine(Load(creditsLevel));
+                    case MENU.CREDITS:
+                        LoadLevel(creditsLevel);
                         break;
                 }
             }
@@ -103,5 +91,41 @@ public class MenuSeletor : MonoBehaviour
         menuAnimator.SetTrigger("ShutDown");
         yield return new WaitForSeconds(1);
         Application.LoadLevel(level);
+    }
+
+    void SetSeletor(MENU menu)
+    {
+        switch (menu)
+        {
+            case MENU.PLAY:
+                gameObject.transform.position =
+                        new Vector3(
+                            gameObject.transform.position.x,
+                            play_btn.transform.position.y,
+                            gameObject.transform.position.z
+                            );
+                selecao = MENU.PLAY;
+                break;
+            case MENU.CREDITS:
+                gameObject.transform.position =
+                        new Vector3(
+                            gameObject.transform.position.x,
+                            score_btn.transform.position.y,
+                            gameObject.transform.position.z
+                            );
+                selecao = MENU.CREDITS;
+                break;
+        }
+    }
+
+    void LoadLevel(string level)
+    {
+        if (!freezeControls)
+        {
+            if (level.Equals("Game")) SetSeletor(MENU.PLAY);
+            else if (level.Equals("Credits")) SetSeletor(MENU.CREDITS);
+
+            StartCoroutine(Load(level));
+        }
     }
 }

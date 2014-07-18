@@ -12,13 +12,15 @@ public class GoToLevelScript : MonoBehaviour
 
     IEnumerator LoadMenu()
     {
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(5f);
 
         OnTouchDown();
     }
 
 	void OnTouchDown()
 	{
+        gameObject.GetComponent<Animator>().SetTrigger("ShutDown");
+
 		Application.LoadLevel(level);
 	}
 }

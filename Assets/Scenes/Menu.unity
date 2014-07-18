@@ -378,7 +378,7 @@ GameObject:
   - 82: {fileID: 472190547}
   m_Layer: 0
   m_Name: selector_btn
-  m_TagString: Untagged
+  m_TagString: MenuSeletor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1064,6 +1064,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 2083838085}
   - 212: {fileID: 2083838084}
+  - 61: {fileID: 2083838086}
+  - 114: {fileID: 2083838087}
   m_Layer: 0
   m_Name: play_btn
   m_TagString: Play_Btn
@@ -1105,6 +1107,30 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 214665585}
+--- !u!61 &2083838086
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2083838083}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Size: {x: 2.68000007, y: .370000005}
+  m_Center: {x: -.25, y: 0}
+--- !u!114 &2083838087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2083838083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a69e6129a51f6ee48b861fd7215eca24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuSeletorTag: MenuSeletor
+  level: Game
 --- !u!1 &2104608489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,8 +1140,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 2104608490}
   - 212: {fileID: 2104608491}
+  - 61: {fileID: 2104608493}
+  - 114: {fileID: 2104608492}
   m_Layer: 0
-  m_Name: score_btn
+  m_Name: credits_btn
   m_TagString: Score_Btn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1155,3 +1183,27 @@ SpriteRenderer:
   m_SortingLayerID: 1448208965
   m_Sprite: {fileID: 21300000, guid: ecde645f22c1ee248b66c1286527045c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &2104608492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2104608489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a69e6129a51f6ee48b861fd7215eca24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuSeletorTag: MenuSeletor
+  level: Credits
+--- !u!61 &2104608493
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2104608489}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Size: {x: 3.03999996, y: .379999995}
+  m_Center: {x: 0, y: 0}

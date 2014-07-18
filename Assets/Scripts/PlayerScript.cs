@@ -55,6 +55,8 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         GameController.onSetAtivo += onSetAtivo;
+
+        gameObject.GetComponent<TrailRenderer>().enabled = false;
     }
 
     void onSetAtivo(bool ativo)
@@ -218,17 +220,24 @@ public class PlayerScript : MonoBehaviour
         isDashing = true;
 
         this.speed += 2;
-        renderer.material.color = Color.blue;//new Color(255, 0, 0);
-        
+        //renderer.material.color = Color.blue;//new Color(255, 0, 0);
+        gameObject.GetComponent<TrailRenderer>().enabled = true;
+        transform.GetChild(0).gameObject.GetComponent<Light>().color = Color.blue;
+
         yield return new WaitForSeconds(.5f);
 
+        gameObject.GetComponent<TrailRenderer>().enabled = false;
 
-        renderer.material.color = Color.cyan;//new Color(255, 0, 0);
+        transform.GetChild(0).gameObject.GetComponent<Light>().color = Color.red;
+        //transform.GetChild(0).gameObject.GetComponent<Light>().intensity /= 2;
+
         this.speed -= 2;
 
         yield return new WaitForSeconds(5f);
 
+        transform.GetChild(0).gameObject.GetComponent<Light>().color = Color.white;
+        //transform.GetChild(0).gameObject.GetComponent<Light>().intensity *= 2;
         isDashing = false;
-        renderer.material.color = new Color(255, 255, 255);
+        //renderer.material.color = new Color(255, 255, 255);
     }
 }

@@ -19,6 +19,8 @@ public class Spawner : MonoBehaviour {
 
 	private GameObject player;
 
+    private float time;
+
     void onSetAtivo(bool ativo)
     {
         _ativo = ativo;
@@ -39,21 +41,26 @@ public class Spawner : MonoBehaviour {
 	{
         if(_ativo && oneTime)
         {
-            StartCoroutine(SpawnMob());
+            StartCoroutine(SpawnMob(mobSpawnTime));
             StartCoroutine(SpawnTrap());
             oneTime = false;
         }
+
+        time += Time.deltaTime;
 	}
 
-	IEnumerator SpawnMob()
+	IEnumerator SpawnMob(float spawnTime)
 	{
-		yield return new WaitForSeconds(mobSpawnTime);
+        yield return new WaitForSeconds(spawnTime);
 
 		if (_ativo)
 		{
 			Instantiate(mob, GetRandomBoundsPosition(), Quaternion.identity);
 
-        	StartCoroutine(SpawnMob());
+
+            if (spawnTime > (mobSpawnTime / 4)) spawnTime -= .05f;
+            StartCoroutine(SpawnMob(spawnTime));
+
 		}
 	}
 
@@ -64,9 +71,26 @@ public class Spawner : MonoBehaviour {
 		if(_ativo)
 		{
 			Instantiate(trap, GetRandomPosition(), Quaternion.identity);
-        
-        	StartCoroutine(SpawnTrap());
+
+            int times = calcTimes();
+
+            for (int i = 0; i < times; i++)
+            {
+        	    StartCoroutine(SpawnTrap());
+            }
+
 		}
+    }
+
+    int calcTimes()
+    {
+        int times = 1;
+
+        if (time > 20) times = 2;
+        if (time > 40) times = 3;
+        if (time > 60) times = 4;
+
+        return times;
     }
 
     Vector3 GetRandomPosition()
@@ -117,7 +141,7 @@ public class Spawner : MonoBehaviour {
 	                vector.y = boundsY2;
 	            }
 	        }
-		} while (Vector3.Distance(vector, player.transform.position) < .2f);
+		} while (Vector3.Distance(vector, player.transform.position) < 2f);
         return vector;
 	}
 }
