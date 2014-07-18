@@ -18,14 +18,23 @@ public class FollowPlayer : MonoBehaviour
     public static event MobHandler onMobDie;
     //-----------------------
 
-    void Start()
+	void Start()
     {
 		GameController.onSetAtivo += onSetAtivo;
 
-        alive = true;
-		_ativo = true;
-        target = GameObject.FindGameObjectWithTag("Player");
+		StartCoroutine(Spawn());
     }
+
+	IEnumerator Spawn()
+	{
+		gameObject.GetComponent<BoxCollider2D> ().enabled = false;
+		yield return new WaitForSeconds (.75f);
+		gameObject.GetComponent<BoxCollider2D> ().enabled = true;
+
+		alive = true;
+		_ativo = true;
+		target = GameObject.FindGameObjectWithTag("Player");
+	}
 
     void FixedUpdate()
     {
