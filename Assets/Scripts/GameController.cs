@@ -45,19 +45,6 @@ public class GameController : MonoBehaviour
         StartCoroutine(StartGame());
 	}
 
-	void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.R) || Input.GetKey("joystick button 5"))
-		{
-			Load("Game");
-		}
-		
-		if (Input.GetKey("joystick button 4") || Input.GetKeyDown(KeyCode.E))
-		{
-			Load("Menu");
-		}
-	}
-
 	void Load(string level)
 	{
 		PlayerScript.onPlayerDeath -= onPlayerDeath;
