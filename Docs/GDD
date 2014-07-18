@@ -1,128 +1,116 @@
 GDD:
 
-MVP______________________________________________________________
-
 Telas
 
 _ Fluxo
 
-Opening screen > Menu screen > InGame > Score screen (over ou end) > [DONE] > Menu screen
-Opening screen > Menu screen > InGame > Score screen (over ou end) > [RETRY] > InGame ...
+1. Redesenhar
 
 _ Wireframe
 
-https://www.dropbox.com/s/l7zmfx9ni7p5f5c/fluxo.png (MVP)
+1. Redesenhar
 
 Tema
 
-Distopia cyberpunk desertic post-Apocalipse
-
-_ Background
-
-Num mundo onde a humanidade se refugia de uma inteligência maior e infalível... as máquinas.
-Grupos de humanos vivem em comunidades em áreas conhecidas como techfree, onde existem distorções
-eletromagnéticas que impossibilitam qualquer telecomunicação e com isso as máquinas de se nortearem.
-
-Apesar disso, muitos humanos são capturados pelas máguinas e jogados em uma espécie de jogo mortal,
-o Last Man Standing que visa extinguir a raça humana.
-
-_ Protagonista
-
-Ela - Esse é o nome do espécime 3529981, capturada em 14 de janeiro de 2451, as 12 horsd e 23 minutos.
-Porte fisico - OK
-Saude - OK
-Testes preliminares - OK
-
-_ Inimigos
-
- - Modelo 01
-Ref: Big dog robot + Matrix octopus
-
- - Modelo 02
+Laser flow Tron
 
 Telas
 
 _ Openning
-1. Tela branca;
-2. Barra de loading;
-3. O logo do studio aparece de uma vez (com um som a definir) e dura por 4 segundos e some em seguida;
-   *Link para o blog que será desenvolvido
-4. Texto 1 aparece e dura 3 segundos; 
-5. Texto 2 aparece do alfa 0% ao 100% em 1 segundos e some em 2 segundos do alfa 100% ao 0%;
-6. O logo do game surge lentamente por 3 segundos.
-7. Texto 3 aparece do alfa 0% ao 100% em 1 segundos e some em 2 segundos do alfa 100% ao 0%;
 
-__ Texts
-1. Tap for skip
-2. Welcome to Last man Standing
-3. Try to survive
+1. Loading lights
+2. Kúa-Káu
+3. Headphones recomended
+4. Try to survive (Logo) > Menu
 
 _ Menu
-1. Essa tela é uma continuação da tela de Openning, possuindo o logo;
-2. O botão de play surge piscando como nos jogos classicos de arcade;
-3. Uma área para publicidade será reservada e indicada na tela.
-
-__ Texts
-1. PLAY (botão)
-2. © 2014 Trapmaker Entertainment. All Rights Reserved.
+1. Logo
+2. Play Song01
+3. Botões em lista slide vertical:
+    a. > Arcade
+    b. > Time
+    c. > Laser
+    d. > Highscores
+    e. > Status
+    f. > Credits
+4. © 2014 Kúa-Kúa studio. All Rights Reserved.
 
 _ InGame
-1. O game começa com um contador regressivo, centralizado na arena, do 3 para o 1 e GO!
-2. O texto 1 surge e dura 2 segundo na área de legenda;
-3. O texto 2 surge depois que o char se aproxima de um obstáculo; (só 1 vez)
-4. O texto 3 surge após pular um obstáculo de parede; (só 1 vez)
-5. O texto 4 surge após pular um obstáculo de buraco. (só 1 vez)
 
-__ texts
+1. Arena
+2. Play Song02
 
-Textos aparecem como legenda em preto com uma voz robótica.
+__Feedbacks
 
-1. ...and the game begins!
-2. jump!
-3. keep running!
-4. don't fall!
+1. Ajustar MOBs para que fique mais claro o "crescimento" ao chegar proximo do player
+2. Spawn dos mobs: Aparecer um ponto piscante onde o mob vai nascer duração de 2s. Nascer colado ao limite da arena.
+3. Spawn da trap: Pontos aparecem e se ligam (like tarantics). Dura 2s.
+4. Hacking! (ao atingir o best score) 
+5. Beaten! (ao quebrar o recorde de amigos)
+6. Nomes dos Achievements
+7. New mode unlocked!
+8. Program active! (no start)
+9. 
 
-_ Score
-1. A tela de score surge depois de 1 segundos que o player perde;
-2. 
-
-__ Texts
-1. GAME OVER
-2. TIME
-3. 00:00
-4. 2000pts
+_ ScoreScreen
+1. Score
+2. Time
+3. Best Score
+4. Btn_share
+5. Btn_status
+6. Btn_
 
 Mecânica
 
 _ Controles
 
-Setas - Correr
-Espaço - Pular
+PC
+WASD, Arrows - Run
+Spacebar - Dash
 
-_ Objetivos
+VITA
+R - Run
+X - Dash
 
 __ Vitória e pontuação
 
-Não colidir com os inimigos,
-Passar maior tempo vivo, cada segundo vale 10pts
-Atrair os inimigos para armadilhas, resultando morte dos mesmos 100pts cada
-Atrair o boss para armadilhas, resultando na morte do mesmo 400pts
+Arcade
+1. Não colidir com os inimigos e traps,
+2. Passar maior tempo vivo, cada decimo de segundo vale 1pts
+3. Destruir os inimigos nas traps ganha 100pts
+4. Combo 1=100, 2=100+200, 3=100+200+300, 4=100+200+300+400...
+
+Time
+1. Não colidir com os inimigos e traps,
+2. Destruir inimigos nas traps ganha 1 segundo e 100pts
+3. Combo 1=100, 2=100+200, 3=100+200+300, 4=100+200+300+400...
+4. Cada decimo de segundo vale 1pts
+
+Laser
+1. 100pts por trap desviada
+2. 
 
 __ Derrota
 
-Colidir com um inimigo Cair em uma armadilha
+1. Colidir com um inimigo
+2. Colidir em uma armadilha
 
 Level Design
 
-_ mob_01
-speed 7,5 - Segue o player 
+_ Inimigos
 
-_ mob_02
-speed 9 - Tambem segue o player, mas possui maior angulo de giro em curvas, como uma carroça de cavalos. (lembrando o bug em que o mob ficava orbitando o player)
+ - RedBlock - MOB1
+SpawnRate: 2s, reduzindo em 0,05s até 1s. Então stop.
+Speed: 2
+Behavior: Follow the player
 
-_ Survival mode
+ - BounceHexagon - MOB2
+SpawnRate: 20s
+Speed: 1
+Behavior: Bounces off the wall
 
-Nesse modo o jogo se passa em uma arena onde os mobs surgem vindos do lado de fora da área de jogo.
+-TriangleSnake - MOB3
+SpawnRate: 35s
+Speed: 3
+Behavior: Straight trajectory, it grows by eating 1 RedBlock (like snake)
 
-A cada 2 segundos um novo mob 01 e o 4º mob a surgir será um mob 02;
-A cada 10 segundos um novo obstáculo aleatório surge e não aparece novo mob. 
