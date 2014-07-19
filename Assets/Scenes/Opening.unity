@@ -707,7 +707,7 @@ GameObject:
   - 4: {fileID: 1894688492}
   - 132: {fileID: 1894688493}
   m_Layer: 0
-  m_Name: Label
+  m_Name: Label2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

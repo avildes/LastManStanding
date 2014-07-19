@@ -18,12 +18,13 @@ public class PlusScoreScript : MonoBehaviour
 	*/
 
 	public GameObject labelTemplate;
-/*
+
     void Start ()
     {
-        EventManager.onMobDie += onMobDie;
+        //EventManager.onMobDie += onMobDie;
+        FollowPlayer.onMobDie += onMobDie;
 	}
-*/
+
     void onMobDie(object sender, MobDeathEventArgs args)
     {
         plusPoints += pointsPerMob;

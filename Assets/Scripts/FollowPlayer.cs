@@ -17,9 +17,9 @@ public class FollowPlayer : MonoBehaviour
     public AudioClip dieSound;
     /*
     //-----EVENT MANAGER-----
-    public static event EventHandler<MobDeathEventArgs> onMobDie;
     //-----------------------
     */
+    public static event EventHandler<MobDeathEventArgs> onMobDie;
 	void Start()
     {
         EventManager.onSetAtivo += onSetAtivo;
