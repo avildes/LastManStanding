@@ -18,15 +18,16 @@ public class NGUIGameController : MonoBehaviour
     public AudioClip start_game2;
     public AudioClip end_game;
 
-    public GameObject finalScoreObject;
-    public GameObject finalScoreValueObject;
-    private GUIText finalScoreValue;
+    public GameObject scoreScreen;
 
-    public GameObject finalTimeValueObject;
-    private GUIText finalTimeValue;
+    public GameObject scoreValues;
 
-    public GameObject bestScoreValueObject;
-    private GUIText bestScoreValue;
+    public GameObject finalTimeSecondsValueObject;
+    public GameObject finalTimeMillisValueObject;
+
+    public GameObject bestTimeSecondsValueObject;
+    public GameObject bestTimeMillisValueObject;
+    
     /*
     //-----EVENT MANAGER-----
     public delegate void GameHandler(bool ativo);
@@ -95,13 +96,17 @@ public class NGUIGameController : MonoBehaviour
     {
         yield return new WaitForSeconds(.7f);
 
-        finalScoreObject.SetActive(true);
+        scoreScreen.SetActive(true);
+        scoreValues.SetActive(true);
 
-        finalScoreValue = finalScoreValueObject.GetComponent<GUIText>();
-        finalScoreValue.text = this._points + "";
+        Debug.Log("time: " + _time);
 
-        finalTimeValue = finalTimeValueObject.GetComponent<GUIText>();
-        finalTimeValue.text = this._time + "";
+        finalTimeSecondsValueObject.GetComponent<UILabel>().text = string.Format("{0}", (int)_time);
+        Debug.Log("secs: " + string.Format("{0}", (int)_time));
+        Debug.Log("secs.text: " + finalTimeSecondsValueObject.GetComponent<UILabel>().text);
+        finalTimeMillisValueObject.GetComponent<UILabel>().text = string.Format("{0}{1}", ((int)(_time * 10)) % 10, ((int)(_time * 100)) % 10);
+        Debug.Log("millis: " + string.Format("{0}{1}", ((int)(_time * 10)) % 10, ((int)(_time * 100)) % 10));
+        Debug.Log("millis.text: " + finalTimeMillisValueObject.GetComponent<UILabel>().text);
 
         float highScore = (float)PersistenceHelper.ReadFloat(PersistenceHelper.HIGHTIME_KEY);
 
@@ -111,8 +116,8 @@ public class NGUIGameController : MonoBehaviour
             PersistenceHelper.PersistFloat(PersistenceHelper.HIGHTIME_KEY, highScore);
         }
 
-        bestScoreValue = bestScoreValueObject.GetComponent<GUIText>();
-        bestScoreValue.text = highScore + "";
+        bestTimeSecondsValueObject.GetComponent<UILabel>().text = string.Format("{0}", (int)highScore);
+        bestTimeMillisValueObject.GetComponent<UILabel>().text = string.Format("{0}{1}", ((int)(highScore * 10)) % 10, ((int)(highScore * 100)) % 10);
     }
 
     public void SetHiScore(float value)

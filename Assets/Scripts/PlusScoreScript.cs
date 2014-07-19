@@ -32,11 +32,11 @@ public class PlusScoreScript : MonoBehaviour
         showTime = maxShowTime;
 
 		Vector3 trapPosition = args.GameObject.transform.position;
-
+        /*
 		GameObject label = (GameObject)Instantiate(labelTemplate);
 		label.guiText.text = "123";
 		label.transform.position = new Vector3(trapPosition.x, trapPosition.y, -2);
-        
+        */
         //StartCoroutine(DestroyLabel(label));
 	}
 
