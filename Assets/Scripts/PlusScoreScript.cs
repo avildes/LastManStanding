@@ -14,28 +14,43 @@ public class PlusScoreScript : MonoBehaviour
     public delegate void PointsHandler(int points);
     public static event PointsHandler onPointsChange;
     //-----------------------
+
+	public GameObject labelTemplate;
 	
     void Start ()
     {
         FollowPlayer.onMobDie += onMobDie;
 	}
 
-    void onMobDie()
+    void onMobDie(object sender, MobDeathEventArgs args)
     {
         plusPoints += pointsPerMob;
         onPointsChange(pointsPerMob);
         showTime = maxShowTime;
+
+		Vector3 trapPosition = args.GameObject.transform.position;
+
+		GameObject label = (GameObject)Instantiate(labelTemplate);
+		label.guiText.text = "123";
+		label.transform.position = new Vector3(trapPosition.x, trapPosition.y, -2);
         
-        //StartCoroutine(ShowPlusPoints());
+        //StartCoroutine(DestroyLabel(label));
 	}
 
-    void Update()
+	IEnumerator DestroyLabel(GameObject label)
+	{
+		yield return new WaitForSeconds(2);
+
+		Destroy(label);
+	}
+
+    /*void Update()
     {
         if(showTime > 0)
         {
             showTime -= Time.deltaTime;
 
-            guiText.text = "+" + plusPoints;
+            guiText.text = "||+" + plusPoints;
         }
         else
         {
@@ -43,6 +58,7 @@ public class PlusScoreScript : MonoBehaviour
             guiText.text = "";
         }
     }
+    */
     /*
     IEnumerator ShowPlusPoints()
     {

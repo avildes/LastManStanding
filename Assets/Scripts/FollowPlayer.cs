@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class FollowPlayer : MonoBehaviour
 {
@@ -14,8 +15,7 @@ public class FollowPlayer : MonoBehaviour
     private bool _ativo;
 
     //-----EVENT MANAGER-----
-    public delegate void MobHandler();
-    public static event MobHandler onMobDie;
+    public static event EventHandler<MobDeathEventArgs> onMobDie;
     //-----------------------
 
 	void Start()
@@ -49,7 +49,7 @@ public class FollowPlayer : MonoBehaviour
     {
         if (collider.gameObject.tag == "Trap")
         {
-            StartCoroutine(Die());
+            StartCoroutine(Die(collider.gameObject));
         }
     }
 
@@ -64,9 +64,9 @@ public class FollowPlayer : MonoBehaviour
 		}
 	}
 
-    IEnumerator Die()
+    IEnumerator Die(GameObject trapGameObject)
     {
-        onMobDie();
+        onMobDie(this, new MobDeathEventArgs(trapGameObject));
 
         gameObject.GetComponent<AudioSource>().Play();
         alive = false;
@@ -76,4 +76,17 @@ public class FollowPlayer : MonoBehaviour
 		GameController.onSetAtivo -= onSetAtivo;
         Destroy(gameObject);
     }
+}
+
+public class MobDeathEventArgs : EventArgs
+{
+	/// <summary>
+	/// Objeto com que o mob colidiu
+	/// </summary>
+	public GameObject GameObject { get; private set; }
+
+	public MobDeathEventArgs(GameObject gameObject)
+	{
+		this.GameObject = gameObject;
+	}
 }
