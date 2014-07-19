@@ -19,7 +19,7 @@ public class CreditsScript : MonoBehaviour
         if (Input.anyKey && playOnce)
         {
             playOnce = false;
-			audioSource.PlayOneShot(buttonSound, 1);
+			audioSource.PlayOneShot(buttonSound, 1.2f);
             StartCoroutine(LoadMenu());
         }
 	}
@@ -28,7 +28,7 @@ public class CreditsScript : MonoBehaviour
     {
         gameObject.GetComponent<Animator>().SetTrigger("CreditsExit");
 
-        yield return new WaitForSeconds(.75f);
+        yield return new WaitForSeconds(1);
 
         Application.LoadLevel("Menu");
     }

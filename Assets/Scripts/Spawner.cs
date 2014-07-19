@@ -31,11 +31,16 @@ public class Spawner : MonoBehaviour {
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
 
-        GameController.onSetAtivo += onSetAtivo;
+        EventManager.onSetAtivo += onSetAtivo;
 		//StartCoroutine(SpawnMob());
         //StartCoroutine(SpawnTrap());
 	}
 	
+    void Destroy()
+    {
+        EventManager.onSetAtivo -= onSetAtivo;
+    }
+
 	// Update is called once per frame
 	void Update ()
 	{

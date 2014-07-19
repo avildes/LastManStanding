@@ -14,7 +14,7 @@ public class TimerScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-        GameController.onSetAtivo += onSetAtivo;
+        EventManager.onSetAtivo += onSetAtivo;
 
 		controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 

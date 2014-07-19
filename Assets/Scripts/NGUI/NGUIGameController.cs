@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameController : MonoBehaviour
+public class NGUIGameController : MonoBehaviour
 {
     public GameObject gameElements;
     private Animator gameElementsAnimator;
@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
     public GameObject scoreObject;
     private ScoreScript scoreClass;
     private int _points = 0;
-	private string _time;
+    private float _time;
 
     private AudioSource source;
     public AudioSource musicSource;
@@ -22,39 +22,39 @@ public class GameController : MonoBehaviour
     public GameObject finalScoreValueObject;
     private GUIText finalScoreValue;
 
-	public GameObject finalTimeValueObject;
-	private GUIText finalTimeValue;
+    public GameObject finalTimeValueObject;
+    private GUIText finalTimeValue;
 
-	public GameObject bestScoreValueObject;
-	private GUIText bestScoreValue;
+    public GameObject bestScoreValueObject;
+    private GUIText bestScoreValue;
     /*
     //-----EVENT MANAGER-----
     public delegate void GameHandler(bool ativo);
     public static event GameHandler onSetAtivo;
 
-	public delegate void LoadSceneHandler();
-	public static event LoadSceneHandler onLoadNewScene;
+    public delegate void LoadSceneHandler();
+    public static event LoadSceneHandler onLoadNewScene;
     //-----------------------
-	*/
-    void Start ()
+    */
+    void Start()
     {
         EventManager.onPlayerDeath += onPlayerDeath;
 
         source = gameObject.GetComponent<AudioSource>();
-        gameElementsAnimator = gameElements.GetComponent < Animator >();
+        gameElementsAnimator = gameElements.GetComponent<Animator>();
         StartCoroutine(StartGame());
-	}
+    }
 
-	void Load(string level)
-	{
+    void Load(string level)
+    {
         EventManager.onPlayerDeath -= onPlayerDeath;
 
-		//onLoadNewScene();
+        //onLoadNewScene();
         EventManager.Instance.onLoadNewSceneEvent();
-		Application.LoadLevel(level);
-	}
+        Application.LoadLevel(level);
+    }
 
-	IEnumerator StartGame()
+    IEnumerator StartGame()
     {
         //gameElementsAnimator.SetTrigger("Start");
         //play start sound
@@ -73,10 +73,10 @@ public class GameController : MonoBehaviour
         this._points = points;
     }
 
-	public void SetTime(string time)
-	{
-		this._time = time;
-	}
+    public void SetTime(float time)
+    {
+        this._time = time;
+    }
 
     void onPlayerDeath()
     {
@@ -85,7 +85,7 @@ public class GameController : MonoBehaviour
 
         source.PlayOneShot(end_game);
         gameElementsAnimator.SetTrigger("End");
-		
+
         //onSetAtivo(false);
         EventManager.Instance.onSetAtivoEvent(false);
         StartCoroutine(ShowFinalScore());
@@ -94,34 +94,34 @@ public class GameController : MonoBehaviour
     IEnumerator ShowFinalScore()
     {
         yield return new WaitForSeconds(.7f);
-		
-		finalScoreObject.SetActive(true);
 
-		finalScoreValue = finalScoreValueObject.GetComponent<GUIText>();
-		finalScoreValue.text = this._points+"";
+        finalScoreObject.SetActive(true);
 
-		finalTimeValue = finalTimeValueObject.GetComponent<GUIText>();
-		finalTimeValue.text = this._time;
+        finalScoreValue = finalScoreValueObject.GetComponent<GUIText>();
+        finalScoreValue.text = this._points + "";
 
-        int highScore = PersistenceHelper.ReadInteger(PersistenceHelper.HIGHSCORE_KEY);
+        finalTimeValue = finalTimeValueObject.GetComponent<GUIText>();
+        finalTimeValue.text = this._time + "";
 
-        if (_points > highScore)
-		{
-            highScore = _points;
-            PersistenceHelper.PersistInteger(PersistenceHelper.HIGHSCORE_KEY, highScore);
-		}
+        float highScore = (float)PersistenceHelper.ReadFloat(PersistenceHelper.HIGHTIME_KEY);
 
-		bestScoreValue = bestScoreValueObject.GetComponent<GUIText>();
-		bestScoreValue.text = highScore + "";
+        if (_time > highScore)
+        {
+            highScore = _time;
+            PersistenceHelper.PersistFloat(PersistenceHelper.HIGHTIME_KEY, highScore);
+        }
+
+        bestScoreValue = bestScoreValueObject.GetComponent<GUIText>();
+        bestScoreValue.text = highScore + "";
     }
 
-    public void SetHiScore(int value)
+    public void SetHiScore(float value)
     {
-        PersistenceHelper.PersistInteger(PersistenceHelper.HIGHSCORE_KEY, value);
+        PersistenceHelper.PersistFloat(PersistenceHelper.HIGHTIME_KEY, value);
     }
 
-    public int GetHiScore()
+    public float GetHiScore()
     {
-        return PersistenceHelper.ReadInteger(PersistenceHelper.HIGHSCORE_KEY);
+        return PersistenceHelper.ReadFloat(PersistenceHelper.HIGHTIME_KEY);
     }
 }

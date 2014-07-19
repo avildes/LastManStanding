@@ -45,16 +45,16 @@ public class PlayerScript : MonoBehaviour
     private bool _ativo = false;
 
 	//public Joystick joystick;
-
+    /*
     //-----EVENT MANAGER-----
     public delegate void PlayerHandler();
     public static event PlayerHandler onPlayerDeath;
     //-----------------------
-
+    */
 
     void Start()
     {
-        GameController.onSetAtivo += onSetAtivo;
+        EventManager.onSetAtivo += onSetAtivo;
 
         gameObject.GetComponent<TrailRenderer>().enabled = false;
     }
@@ -179,7 +179,7 @@ public class PlayerScript : MonoBehaviour
 			//totalTime = TimerScript.Instance.GetTotalTime();
 			//endTimeText.text = string.Format("{0:f2}", totalTime);
 			alive = false;
-            onPlayerDeath();
+            EventManager.Instance.onPlayerDeathEvent();
 			Destroy(gameObject);
 		}
     }

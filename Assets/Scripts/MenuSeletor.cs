@@ -89,7 +89,7 @@ public class MenuSeletor : MonoBehaviour
         source.PlayOneShot(menu_enter, 1);
         freezeControls = true;
         menuAnimator.SetTrigger("ShutDown");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.2f);
         Application.LoadLevel(level);
     }
 

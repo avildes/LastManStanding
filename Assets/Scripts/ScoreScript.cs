@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ScoreScript : MonoBehaviour {
 
-	private int _totalScore = 0;
+    private int _totalScore = 0;
     private float timeOffset = .1f;
     private float _totalTime;
 
@@ -16,9 +16,9 @@ public class ScoreScript : MonoBehaviour {
 	{
         controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
-        PlusScoreScript.onPointsChange += onPointsChange;
-        GameController.onSetAtivo += onSetAtivo;
-		GameController.onLoadNewScene += onLoadNewScene;
+        EventManager.onPointsChange += onPointsChange;
+        EventManager.onSetAtivo += onSetAtivo;
+        EventManager.onLoadNewScene += onLoadNewScene;
 
 		_totalTime = 0;
 		guiText.text = "0000";
@@ -26,9 +26,9 @@ public class ScoreScript : MonoBehaviour {
 
 	void onLoadNewScene()
 	{
-		PlusScoreScript.onPointsChange -= onPointsChange;
-		GameController.onSetAtivo -= onSetAtivo;
-		GameController.onLoadNewScene -= onLoadNewScene;
+        EventManager.onPointsChange -= onPointsChange;
+        EventManager.onSetAtivo -= onSetAtivo;
+        EventManager.onLoadNewScene -= onLoadNewScene;
 	}
 	
 	// Update is called once per frame
@@ -72,7 +72,6 @@ public class ScoreScript : MonoBehaviour {
         this._totalScore += points;
     }
 
-    //TODO e se score estourar o int?
     public int GetTotalScore()
     {
         return _totalScore;

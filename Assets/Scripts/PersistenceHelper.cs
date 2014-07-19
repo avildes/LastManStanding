@@ -5,6 +5,7 @@ using System;
 public class PersistenceHelper
 {
 	public const string HIGHSCORE_KEY = "HighScore";
+    public const string HIGHTIME_KEY = "HighTime";
 
 	public static void PersistInteger (string key, int value)
 	{
@@ -26,4 +27,25 @@ public class PersistenceHelper
 
 		return value;
 	}
+
+    public static void PersistFloat(string key, float value)
+    {
+        byte[] data = BitConverter.GetBytes(value);
+        string base64Data = Convert.ToBase64String(data);
+
+        PlayerPrefs.SetString(key, base64Data);
+    }
+
+    public static float ReadFloat(string key)
+    {
+        float value = 0;
+        if (PlayerPrefs.HasKey(key))
+        {
+            string base64Data = PlayerPrefs.GetString(key);
+            byte[] data = Convert.FromBase64String(base64Data);
+            value = BitConverter.ToSingle(data, 0);
+        }
+
+        return value;
+    }
 }

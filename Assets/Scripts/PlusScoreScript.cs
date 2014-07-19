@@ -9,21 +9,23 @@ public class PlusScoreScript : MonoBehaviour
 
     private float showTime;
     private float maxShowTime = 2f;
-
+    
+    /*
     //-----EVENT MANAGER-----
     public delegate void PointsHandler(int points);
     public static event PointsHandler onPointsChange;
     //-----------------------
-	
+	*/
+
     void Start ()
     {
-        FollowPlayer.onMobDie += onMobDie;
+        EventManager.onMobDie += onMobDie;
 	}
 
     void onMobDie()
     {
         plusPoints += pointsPerMob;
-        onPointsChange(pointsPerMob);
+        EventManager.Instance.onPointsChangeEvent(pointsPerMob);
         showTime = maxShowTime;
         
         //StartCoroutine(ShowPlusPoints());
@@ -35,12 +37,12 @@ public class PlusScoreScript : MonoBehaviour
         {
             showTime -= Time.deltaTime;
 
-            guiText.text = "+" + plusPoints;
+            //guiText.text = "+" + plusPoints;
         }
         else
         {
             plusPoints = 0;
-            guiText.text = "";
+            //guiText.text = "";
         }
     }
     /*

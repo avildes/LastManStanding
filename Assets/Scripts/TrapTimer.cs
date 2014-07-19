@@ -12,7 +12,7 @@ public class TrapTimer : MonoBehaviour
 
 	void Start ()
     {
-        GameController.onSetAtivo += onSetAtivo;
+        EventManager.onSetAtivo += onSetAtivo;
 
 		animator = gameObject.GetComponent<Animator>();
 		collider = gameObject.GetComponent<PolygonCollider2D>();
@@ -27,7 +27,7 @@ public class TrapTimer : MonoBehaviour
     {
         if (!ativo)
         {
-			GameController.onSetAtivo -= onSetAtivo;
+            EventManager.onSetAtivo -= onSetAtivo;
 			Destroy(gameObject);
         }
     }
@@ -41,8 +41,8 @@ public class TrapTimer : MonoBehaviour
 	IEnumerator Timer()
 	{
 		yield return new WaitForSeconds(timer);
-		
-		GameController.onSetAtivo -= onSetAtivo;
+
+        EventManager.onSetAtivo -= onSetAtivo;
 
 		animator.SetTrigger("Destroi");
 		collider.enabled = false;

@@ -8,15 +8,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 212: {fileID: 21200000}
-  - 50: {fileID: 5000000}
-  - 114: {fileID: 11400000}
-  - 61: {fileID: 6100000}
   - 82: {fileID: 8200000}
-  - 95: {fileID: 9500000}
+  - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Enemy
-  m_TagString: Enemy
+  m_Name: NGUIController
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,36 +24,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0210502576, y: -.129999995, z: 0}
+  m_LocalPosition: {x: .11291486, y: -.057780046, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!50 &5000000
-Rigidbody2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: .0500000007
-  m_GravityScale: 0
-  m_FixedAngle: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
---- !u!61 &6100000
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Size: {x: .119999997, y: .119999997}
-  m_Center: {x: 0, y: 0}
 --- !u!82 &8200000
 AudioSource:
   m_ObjectHideFlags: 1
@@ -66,9 +36,9 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 36a605ce8566989489c4f9b5ec48b26e, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .699999988
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -116,20 +86,6 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!95 &9500000
-Animator:
-  serializedVersion: 2
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cce82870c2495a64e9c71a37b4f66ee9, type: 2}
-  m_CullingMode: 0
-  m_ApplyRootMotion: 1
-  m_AnimatePhysics: 0
-  m_HasTransformHierarchy: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,34 +94,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: facf8fa14900f48df9a31a146ade6a35, type: 3}
+  m_Script: {fileID: 11500000, guid: d5f66bea63dcb7f48a364d04d45f517b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  dieSound: {fileID: 8300000, guid: 36a605ce8566989489c4f9b5ec48b26e, type: 3}
---- !u!212 &21200000
-SpriteRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: b93f337433573ee43a241fdc3b3e98c0, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_SortingLayerID: 0
-  m_Sprite: {fileID: 21300000, guid: efe934c3349d2b54abbb76c0c0c6e883, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  gameElements: {fileID: 0}
+  scoreObject: {fileID: 0}
+  musicSource: {fileID: 0}
+  start_game: {fileID: 8300000, guid: 19ff3777680d6af4e9fb97b08b0023f3, type: 3}
+  start_game2: {fileID: 8300000, guid: 5bf2b6e9c02f3934fb1786ace20298b6, type: 3}
+  end_game: {fileID: 8300000, guid: 6cba75818ac6a3048b8d33a52f82a8d0, type: 3}
+  finalScoreObject: {fileID: 0}
+  finalScoreValueObject: {fileID: 0}
+  finalTimeValueObject: {fileID: 0}
+  bestScoreValueObject: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

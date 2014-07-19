@@ -13,14 +13,16 @@ public class FollowPlayer : MonoBehaviour
 
     private bool _ativo;
 
+    public AudioClip dieSound;
+    /*
     //-----EVENT MANAGER-----
     public delegate void MobHandler();
     public static event MobHandler onMobDie;
     //-----------------------
-
+    */
 	void Start()
     {
-		GameController.onSetAtivo += onSetAtivo;
+        EventManager.onSetAtivo += onSetAtivo;
 
 		StartCoroutine(Spawn());
     }
@@ -59,21 +61,21 @@ public class FollowPlayer : MonoBehaviour
 		if (!ativo)
 		{
 			alive = false;
-			GameController.onSetAtivo -= onSetAtivo;
+            EventManager.onSetAtivo -= onSetAtivo;
 			Destroy(gameObject);
 		}
 	}
 
     IEnumerator Die()
     {
-        onMobDie();
+        EventManager.Instance.onMobDieEvent();
 
         gameObject.GetComponent<AudioSource>().Play();
         alive = false;
 
         yield return new WaitForSeconds(.1f);
 
-		GameController.onSetAtivo -= onSetAtivo;
+        EventManager.onSetAtivo -= onSetAtivo;
         Destroy(gameObject);
     }
 }
