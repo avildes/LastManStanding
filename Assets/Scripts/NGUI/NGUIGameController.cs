@@ -101,13 +101,6 @@ public class NGUIGameController : MonoBehaviour
 
         Debug.Log("time: " + _time);
 
-        finalTimeSecondsValueObject.GetComponent<UILabel>().text = string.Format("{0}", (int)_time);
-        Debug.Log("secs: " + string.Format("{0}", (int)_time));
-        Debug.Log("secs.text: " + finalTimeSecondsValueObject.GetComponent<UILabel>().text);
-        finalTimeMillisValueObject.GetComponent<UILabel>().text = string.Format("{0}{1}", ((int)(_time * 10)) % 10, ((int)(_time * 100)) % 10);
-        Debug.Log("millis: " + string.Format("{0}{1}", ((int)(_time * 10)) % 10, ((int)(_time * 100)) % 10));
-        Debug.Log("millis.text: " + finalTimeMillisValueObject.GetComponent<UILabel>().text);
-
         float highScore = (float)PersistenceHelper.ReadFloat(PersistenceHelper.HIGHTIME_KEY);
 
         if (_time > highScore)
@@ -115,6 +108,13 @@ public class NGUIGameController : MonoBehaviour
             highScore = _time;
             PersistenceHelper.PersistFloat(PersistenceHelper.HIGHTIME_KEY, highScore);
         }
+        finalTimeSecondsValueObject.GetComponent<UILabel>().text = string.Format("{0}", (int)_time);
+        Debug.Log("secs: " + string.Format("{0}", (int)_time));
+        Debug.Log("secs.text: " + finalTimeSecondsValueObject.GetComponent<UILabel>().text);
+        finalTimeMillisValueObject.GetComponent<UILabel>().text = string.Format("{0}{1}", ((int)(_time * 10)) % 10, ((int)(_time * 100)) % 10);
+        Debug.Log("millis: " + string.Format("{0}{1}", ((int)(_time * 10)) % 10, ((int)(_time * 100)) % 10));
+        Debug.Log("millis.text: " + finalTimeMillisValueObject.GetComponent<UILabel>().text);
+
 
         bestTimeSecondsValueObject.GetComponent<UILabel>().text = string.Format("{0}", (int)highScore);
         bestTimeMillisValueObject.GetComponent<UILabel>().text = string.Format("{0}{1}", ((int)(highScore * 10)) % 10, ((int)(highScore * 100)) % 10);
