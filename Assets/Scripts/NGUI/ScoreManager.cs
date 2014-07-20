@@ -104,6 +104,7 @@ public class ScoreManager : MonoBehaviour
         if (!ativo)
         {
             controller.SetTime(_totalTime);//_totalTimeFormatted);
+            gameObject.SetActive(ativo);
         }
     }
 

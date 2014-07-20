@@ -83,6 +83,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 10627942}
   - 212: {fileID: 10627943}
+  - 95: {fileID: 10627944}
   m_Layer: 0
   m_Name: ScoreScreen
   m_TagString: FinalScoreObject
@@ -127,6 +128,20 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_Sprite: {fileID: 21300000, guid: 2d8062a1f1b0945a5bada2e52ae58266, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!95 &10627944
+Animator:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 10627941}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_ApplyRootMotion: 1
+  m_AnimatePhysics: 0
+  m_HasTransformHierarchy: 1
 --- !u!1 &101563697
 GameObject:
   m_ObjectHideFlags: 0
