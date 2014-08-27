@@ -86,7 +86,7 @@ public class ScoreManager : MonoBehaviour
 
             if (isNewRecord)
             {
-                gameObject.GetComponent<AudioSource>().PlayOneShot(newRecord, 1);
+                //gameObject.GetComponent<AudioSource>().PlayOneShot(newRecord, 1);
                 isNewRecord = false;
             }
         }
@@ -104,7 +104,7 @@ public class ScoreManager : MonoBehaviour
         if (!ativo)
         {
             controller.SetTime(_totalTime);//_totalTimeFormatted);
-            gameObject.SetActive(ativo);
+            //gameObject.SetActive(ativo);
         }
     }
 

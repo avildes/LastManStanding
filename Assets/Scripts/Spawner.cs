@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour {
 	public GameObject mob;
     public GameObject trap;
 
-    public float trapSpawnTime = 12f;
+    private float trapSpawnTime = 12f;
     public float mobSpawnTime = 2;
 
 	public float boundsX1 = 19f;
@@ -47,7 +47,7 @@ public class Spawner : MonoBehaviour {
         if(_ativo && oneTime)
         {
             StartCoroutine(SpawnMob(mobSpawnTime));
-            StartCoroutine(SpawnTrap());
+            StartCoroutine(SpawnTraps());
             oneTime = false;
         }
 
@@ -63,7 +63,14 @@ public class Spawner : MonoBehaviour {
 			Instantiate(mob, GetRandomBoundsPosition(), Quaternion.identity);
 
 
-            if (spawnTime > (mobSpawnTime / 4)) spawnTime -= .05f;
+            if (spawnTime > (mobSpawnTime / 4))
+            {
+                spawnTime -= .05f;
+            }
+            else
+            {
+                spawnTime = mobSpawnTime - .3f;
+            }
             StartCoroutine(SpawnMob(spawnTime));
 
 		}
@@ -76,15 +83,35 @@ public class Spawner : MonoBehaviour {
 		if(_ativo)
 		{
 			Instantiate(trap, GetRandomPosition(), Quaternion.identity);
-
+            /*
             int times = calcTimes();
 
             for (int i = 0; i < times; i++)
+            {*/
+            if(time>45)
             {
         	    StartCoroutine(SpawnTrap());
             }
-
+            /*}
+            */
 		}
+    }
+
+    IEnumerator SpawnTraps()
+    {
+        StartCoroutine(SpawnTrap());
+        yield return new WaitForSeconds(12);
+        StartCoroutine(SpawnTrap());
+        StartCoroutine(SpawnTrap());
+        yield return new WaitForSeconds(12);
+        StartCoroutine(SpawnTrap());
+        StartCoroutine(SpawnTrap());
+        StartCoroutine(SpawnTrap());
+        yield return new WaitForSeconds(12);
+        StartCoroutine(SpawnTrap());
+        StartCoroutine(SpawnTrap());
+        StartCoroutine(SpawnTrap());
+        StartCoroutine(SpawnTrap());
     }
 
     int calcTimes()
