@@ -1,7 +1,8 @@
 BUGS
 
-1. 
-2. 
+1. Traps se sobrepondo
+2. Mobs nascendo dentro de traps
+3. 
 
 MELHORIAS
 
@@ -9,8 +10,12 @@ MELHORIAS
 2. Spawn dos mobs: Aparecer um ponto piscante onde o mob vai nascer duração de 2s. Nascer colado ao limite da arena.
 3. Spawn da trap: Pontos aparecem e se ligam (like tarantics). Dura 2s.
 4. Hacking! (ao atingir o best score) 
-5. Beaten! (ao quebrar o recorde de amigos)
+5. Beaten! (ao quebrar o recorde de amigos) - facebook
 6. Nomes dos Achievements
-7. New mode unlocked!
+7. New mode unlocked! - Projetar
 8. Program active! (no start)
 9. Countdown no start
+10. Limitar em 4 traps
+11. Quando atingir a quantidade máxima de mobs, reiniciar spawn rate
+12. Reajustar tela de score pra o Vita
+13. Implementar nova tela de score e menu
