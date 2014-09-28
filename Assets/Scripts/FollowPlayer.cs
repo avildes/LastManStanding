@@ -77,7 +77,12 @@ public class FollowPlayer : MonoBehaviour
         gameObject.GetComponent<AudioSource>().Play();
         alive = false;
 
-        yield return new WaitForSeconds(.1f);
+        GetComponent<BoxCollider2D>().enabled = false;
+        //GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Animator>().SetTrigger("die");
+        GetComponent<ParticleSystem>().Play();
+        //yield return new WaitForSeconds(.01f);
+        yield return new WaitForSeconds(1f);
 
         EventManager.onSetAtivo -= onSetAtivo;
         Destroy(gameObject);
