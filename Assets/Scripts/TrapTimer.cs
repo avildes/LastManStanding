@@ -5,7 +5,7 @@ public class TrapTimer : MonoBehaviour
 {
     public float TrapLifeTime;
 
-	private float timer = 8f;
+    private float timer = 7f;
 
 	private Animator animator;
 	private Collider2D collider;

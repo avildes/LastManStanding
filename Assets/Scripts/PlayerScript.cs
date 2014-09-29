@@ -6,25 +6,25 @@ using System.Collections;
 /// </summary>
 public class PlayerScript : MonoBehaviour
 {
-	/// <summary>
-	/// Velocidade do player
-	/// </summary>
-	public int speed = 2;
-	
+    /// <summary>
+    /// Velocidade do player
+    /// </summary>
+    public int speed = 2;
+
     /// <summary>
     /// Texto usado para mostrar o tempo final
     /// </summary>
     public GUIText endTimeText;
 
-	/// <summary>
+    /// <summary>
     /// Vetor que representa o movimento do player
     /// </summary>
-	private Vector2 movement;
+    private Vector2 movement;
 
     /// <summary>
     /// Vetor de direçao do movimento do jogador no momento do pulo
     /// </summary>
-//    private Vector2 jumpMomentVector;
+    //    private Vector2 jumpMomentVector;
 
     /// <summary>
     /// Flag que indica se o player esta pulando
@@ -41,16 +41,20 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     private float totalTime;
 
-	private bool alive = true;
+    private bool alive = true;
     private bool _ativo = false;
 
-	//public Joystick joystick;
+    //public Joystick joystick;
     /*
     //-----EVENT MANAGER-----
     public delegate void PlayerHandler();
     public static event PlayerHandler onPlayerDeath;
     //-----------------------
     */
+
+    public AudioSource musicSrc;
+    public AudioSource fxSrc;
+    public GameObject pause;
 
     void Start()
     {
@@ -74,114 +78,178 @@ public class PlayerScript : MonoBehaviour
 	}
     */
 
-	float CheckJoystickAxis(float value)
-	{
-		float retorno = 0;
+    float CheckJoystickAxis(float value)
+    {
+        float retorno = 0;
 
-		if(value > 0)
-		{
-			retorno = 1;
-		}
-		else if(value < 0)
-		{
-			retorno = -1;
-		}
+        if (value > 0)
+        {
+            retorno = 1;
+        }
+        else if (value < 0)
+        {
+            retorno = -1;
+        }
 
-		return retorno;
-	}
+        return retorno;
+    }
 
-	void Update()
-	{
-		if(alive && _ativo)
-		{
-			// Recupera o input do jogador
-			float inputX = 0;
+    void Update()
+    {
+        if (alive && _ativo)
+        {
+            // Recupera o input do jogador
+            float inputX = 0;
             float inputY = 0;
 
-			if(Input.GetAxis("Horizontal")  != 0)
-			{
-				inputX = Input.GetAxis("Horizontal");
-			}
-			else
-			{
-				//inputX = CheckJoystickAxis(joystick.position.x);
-			}
+            if (Input.GetAxis("Horizontal") != 0)
+            {
+                inputX = Input.GetAxis("Horizontal");
+            }
+            else
+            {
+                //inputX = CheckJoystickAxis(joystick.position.x);
+            }
 
-			if(Input.GetAxis("Vertical")  != 0)
-			{
-				inputY = Input.GetAxis("Vertical");
-			}
-			else
-			{
-				//inputY = CheckJoystickAxis(joystick.position.y);
-			}
-
-
-			// float inputX = Input.GetAxis("Horizontal") ? Input.GetAxis ("Horizontal") : joyStickInput(moveJoystick);;
-			//float inputY = Input.GetAxis("Vertical") ? Input.GetAxis ("Vertical") : joyStickInput(moveJoystick);
-        
-        	// Seta o vetor de movimento de acordo com o input
-			movement = (new Vector2(inputX, inputY)).normalized * speed;
+            if (Input.GetAxis("Vertical") != 0)
+            {
+                inputY = Input.GetAxis("Vertical");
+            }
+            else
+            {
+                //inputY = CheckJoystickAxis(joystick.position.y);
+            }
 
 
-		/*
-        // FIXME Quando o player esta parado antes de pular, e possivel mudar de direçao
-        // Se o player esta pulando, ele pode mover-se apenas na mesma direçao com que iniciou o pulo
-        if (isJumping && jumpMomentVector.magnitude != 0) && !_IsInSameDirection(movement, jumpMomentVector))
-        {
-            movement = new Vector2(0, 0);
-        }*/
+            // float inputX = Input.GetAxis("Horizontal") ? Input.GetAxis ("Horizontal") : joyStickInput(moveJoystick);;
+            //float inputY = Input.GetAxis("Vertical") ? Input.GetAxis ("Vertical") : joyStickInput(moveJoystick);
 
-        	if (Input.GetKey("joystick button 0") || Input.GetKeyDown(KeyCode.Space))
-        	{
-//	            jumpMomentVector = new Vector2(inputX, inputY);
-				PressedDashButton();
-        	}
-		}
-	}
+            // Seta o vetor de movimento de acordo com o input
+            movement = (new Vector2(inputX, inputY)).normalized * speed;
+
+
+            /*
+            // FIXME Quando o player esta parado antes de pular, e possivel mudar de direçao
+            // Se o player esta pulando, ele pode mover-se apenas na mesma direçao com que iniciou o pulo
+            if (isJumping && jumpMomentVector.magnitude != 0) && !_IsInSameDirection(movement, jumpMomentVector))
+            {
+                movement = new Vector2(0, 0);
+            }*/
+
+            if (Input.GetKey("joystick button 7") || Input.GetKeyDown(KeyCode.A))
+            {
+                PressedPauseButton();
+            }
+
+            if (Input.GetKey("joystick button 0") || Input.GetKeyDown(KeyCode.Space))
+            {
+                //	            jumpMomentVector = new Vector2(inputX, inputY);
+                PressedDashButton();
+            }
+        }
+    }
 
     void PressedDashButton()
-	{
-		if(!isDashing)
-		{
-			StartCoroutine(DashCoroutine());
-		}
-	}
+    {
+        if (!isDashing)
+        {
+            StartCoroutine(DashCoroutine());
+        }
+    }
 
-	void FixedUpdate()
-	{
-		rigidbody2D.velocity = movement;
-	}
+    void PressedPauseButton()
+    {
+        if (Time.timeScale == 0)
+        {
 
-	void OnCollisionEnter2D(Collision2D hit)
-	{
-		if (hit.gameObject.tag == "Enemy")
-		{
-            OnPlayerDeath();
-		}
-	}
+            //StartCoroutine(ExitPause());
+            pause.SetActive(false);
+            
+            musicSrc.Play();
+            fxSrc.Play();
+
+            pause.SetActive(false);
+
+            Time.timeScale = 1;
+        }
+        else
+        {
+            musicSrc.Pause();
+            fxSrc.Play();
+
+            pause.SetActive(true);
+            Time.timeScale = 0;
+        }
+    }
+
+    IEnumerator ExitPause()
+    {
+        fxSrc.Play();
+        
+
+        UILabel label = pause.transform.GetChild(0).GetComponent<UILabel>();
+        label.text = 3f + "";
+        yield return new WaitForSeconds(1);
+        label.text = 2f + "";
+        yield return new WaitForSeconds(1);
+        label.text = 1f + "";
+        yield return new WaitForSeconds(1);
+        label.text = "";
+
+        pause.SetActive(false);
+
+        Time.timeScale = 1;
+        musicSrc.Play();
+    }
+
+    void FixedUpdate()
+    {
+        rigidbody2D.velocity = movement;
+    }
+
+    void OnCollisionEnter2D(Collision2D hit)
+    {
+        if (hit.gameObject.tag == "Enemy")
+        {
+            StartCoroutine(OnPlayerDeath());
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Trap")
         {
-        	OnPlayerDeath();
+            StartCoroutine(OnPlayerDeath());
         }
     }
 
     /// <summary>
     /// Metodo que realiza as atividades relacionadas a morte do player
     /// </summary>
-    private void OnPlayerDeath()
+    private IEnumerator OnPlayerDeath()
     {
-		if(alive)
-		{
-			//totalTime = TimerScript.Instance.GetTotalTime();
-			//endTimeText.text = string.Format("{0:f2}", totalTime);
-			alive = false;
+        if (alive)
+        {
+            //totalTime = TimerScript.Instance.GetTotalTime();
+            //endTimeText.text = string.Format("{0:f2}", totalTime);
+            alive = false;
+
+            movement = new Vector2(0, 0);
+            GetComponent<CircleCollider2D>().enabled = false;
+
+            //GetComponent<Animator>().SetTrigger("die");
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<ParticleSystem>().Play();
+
+            Component halo = GetComponent("Halo");
+            halo.GetType().GetProperty("enabled").SetValue(halo, false, null);
+
             EventManager.Instance.onPlayerDeathEvent();
-			Destroy(gameObject);
-		}
+
+            yield return new WaitForSeconds(1f);
+
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>
@@ -203,10 +271,10 @@ public class PlayerScript : MonoBehaviour
     private IEnumerator JumpCoroutine()
     {
         isJumping = true;
-        
+
         renderer.material.color = new Color(255, 0, 0);
         yield return new WaitForSeconds(0.5f);
-        
+
         isJumping = false;
         renderer.material.color = new Color(255, 255, 255);
     }
