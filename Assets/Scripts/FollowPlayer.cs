@@ -15,6 +15,8 @@ public class FollowPlayer : MonoBehaviour
     private bool _ativo;
 
     public AudioClip dieSound;
+
+	private Vector2 movement;
     /*
     //-----EVENT MANAGER-----
     //-----------------------
@@ -37,13 +39,23 @@ public class FollowPlayer : MonoBehaviour
 		_ativo = true;
 		target = GameObject.FindGameObjectWithTag("Player");
 	}
-
+	/*
+	void Update()
+	{
+		if (alive)
+		{
+			_direction = target.transform.position - transform.position;
+			movement = _direction.normalized * speed;
+		}
+	}
+	*/
     void FixedUpdate()
     {
         if (alive)
         {
-            _direction = target.transform.position - transform.position;
-            rigidbody2D.velocity = _direction.normalized * speed;
+            //rigidbody2D.velocity = movement;
+			_direction = target.transform.position - transform.position;
+			rigidbody2D.velocity = _direction.normalized * speed;
         }
     }
 
@@ -72,11 +84,10 @@ public class FollowPlayer : MonoBehaviour
         //EventManager.Instance.onMobDieEvent();
 
         onMobDie(this, new MobDeathEventArgs(trapGameObject));
-
-
         gameObject.GetComponent<AudioSource>().Play();
         alive = false;
 
+		//movement = new Vector2(0, 0);
         GetComponent<BoxCollider2D>().enabled = false;
         //GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<Animator>().SetTrigger("die");
