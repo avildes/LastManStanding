@@ -26,7 +26,6 @@ QualitySettings:
     particleRaycastBudget: 4
     excludedTargetPlatforms:
     - PSM
-    - Standalone
   - serializedVersion: 2
     name: Fast
     pixelLightCount: 0
@@ -46,7 +45,6 @@ QualitySettings:
     maximumLODLevel: 0
     particleRaycastBudget: 16
     excludedTargetPlatforms:
-    - Standalone
     - PSM
   - serializedVersion: 2
     name: Simple
@@ -68,7 +66,6 @@ QualitySettings:
     particleRaycastBudget: 64
     excludedTargetPlatforms:
     - PSM
-    - Standalone
   - serializedVersion: 2
     name: Good
     pixelLightCount: 2
@@ -88,7 +85,6 @@ QualitySettings:
     maximumLODLevel: 0
     particleRaycastBudget: 256
     excludedTargetPlatforms:
-    - Standalone
     - PSM
   - serializedVersion: 2
     name: Beautiful
@@ -110,7 +106,6 @@ QualitySettings:
     particleRaycastBudget: 1024
     excludedTargetPlatforms:
     - PSM
-    - Standalone
   - serializedVersion: 2
     name: Fantastic
     pixelLightCount: 4
