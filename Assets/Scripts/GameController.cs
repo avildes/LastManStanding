@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour
 	}
 
 	IEnumerator StartGame()
-    {
+	{
         //gameElementsAnimator.SetTrigger("Start");
         //play start sound
         source.PlayOneShot(start_game2);
@@ -103,12 +103,12 @@ public class GameController : MonoBehaviour
 		finalTimeValue = finalTimeValueObject.GetComponent<GUIText>();
 		finalTimeValue.text = this._time;
 
-        int highScore = PersistenceHelper.ReadInteger(PersistenceHelper.HIGHSCORE_KEY);
+        int highScore = PersistenceHelper.Instance.ReadInteger(PersistenceHelper.HIGHSCORE_KEY);
 
         if (_points > highScore)
 		{
             highScore = _points;
-            PersistenceHelper.PersistInteger(PersistenceHelper.HIGHSCORE_KEY, highScore);
+            PersistenceHelper.Instance.PersistInteger(PersistenceHelper.HIGHSCORE_KEY, highScore);
 		}
 
 		bestScoreValue = bestScoreValueObject.GetComponent<GUIText>();
@@ -117,11 +117,11 @@ public class GameController : MonoBehaviour
 
     public void SetHiScore(int value)
     {
-        PersistenceHelper.PersistInteger(PersistenceHelper.HIGHSCORE_KEY, value);
+        PersistenceHelper.Instance.PersistInteger(PersistenceHelper.HIGHSCORE_KEY, value);
     }
 
     public int GetHiScore()
     {
-        return PersistenceHelper.ReadInteger(PersistenceHelper.HIGHSCORE_KEY);
+        return PersistenceHelper.Instance.ReadInteger(PersistenceHelper.HIGHSCORE_KEY);
     }
 }

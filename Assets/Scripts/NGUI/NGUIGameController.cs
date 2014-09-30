@@ -55,6 +55,16 @@ public class NGUIGameController : MonoBehaviour
         Application.LoadLevel(level);
     }
 
+	void OnApplicationQuit()
+	{
+		PersistenceHelper.Instance.Save();
+	}
+	
+	void OnApplicationPause()
+	{
+		PersistenceHelper.Instance.Save();
+	}
+
     IEnumerator StartGame()
     {
         //gameElementsAnimator.SetTrigger("Start");
@@ -101,12 +111,12 @@ public class NGUIGameController : MonoBehaviour
 
         Debug.Log("time: " + _time);
 
-        float highScore = (float)PersistenceHelper.ReadFloat(PersistenceHelper.HIGHTIME_KEY);
+        float highScore = PersistenceHelper.Instance.ReadFloat(PersistenceHelper.HIGHTIME_KEY);
 
         if (_time > highScore)
         {
             highScore = _time;
-            PersistenceHelper.PersistFloat(PersistenceHelper.HIGHTIME_KEY, highScore);
+            PersistenceHelper.Instance.PersistFloat(PersistenceHelper.HIGHTIME_KEY, highScore);
         }
         finalTimeSecondsValueObject.GetComponent<UILabel>().text = string.Format("{0}", (int)_time);
         Debug.Log("secs: " + string.Format("{0}", (int)_time));
@@ -122,11 +132,11 @@ public class NGUIGameController : MonoBehaviour
 
     public void SetHiScore(float value)
     {
-        PersistenceHelper.PersistFloat(PersistenceHelper.HIGHTIME_KEY, value);
+        PersistenceHelper.Instance.PersistFloat(PersistenceHelper.HIGHTIME_KEY, value);
     }
 
     public float GetHiScore()
     {
-        return PersistenceHelper.ReadFloat(PersistenceHelper.HIGHTIME_KEY);
+        return PersistenceHelper.Instance.ReadFloat(PersistenceHelper.HIGHTIME_KEY);
     }
 }
