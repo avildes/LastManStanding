@@ -80,7 +80,6 @@ public class FollowPlayer : MonoBehaviour
 
     IEnumerator Die(GameObject trapGameObject)
     {
-
         //EventManager.Instance.onMobDieEvent();
 
         onMobDie(this, new MobDeathEventArgs(trapGameObject));

@@ -5,6 +5,7 @@ public class Spawner : MonoBehaviour
 {
 
     public GameObject mob;
+    public GameObject bouncyMob;
     public GameObject trap;
 
     private float trapSpawnTime = 12f;
