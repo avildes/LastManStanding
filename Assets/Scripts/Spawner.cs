@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
 
     private float trapSpawnTime = 12f;
     public float mobSpawnTime = 2;
+    private float boucyMobSpawnTime = 40;
 
     public float boundsX1 = 19f;
     public float boundsX2 = 39f;
@@ -69,6 +70,7 @@ public class Spawner : MonoBehaviour
         if (_ativo && oneTime)
         {
             StartCoroutine(SpawnMob(mobSpawnTime));
+            StartCoroutine(SpawnBouncyMob(boucyMobSpawnTime));
             StartCoroutine(SpawnTraps());
             oneTime = false;
         }
@@ -95,6 +97,31 @@ public class Spawner : MonoBehaviour
             }
             StartCoroutine(SpawnMob(spawnTime));
         }
+    }
+
+    IEnumerator SpawnBouncyMob(float spawnTime)
+    {
+        yield return new WaitForSeconds(spawnTime);
+
+        if (_ativo)
+        {
+            //Instantiate(mob, GetRandomBoundsPosition(), Quaternion.identity);
+            Instantiate(bouncyMob, GetRandomPositionInsidePolyDistantFromPlayer(hexagonArray, 2f), Quaternion.identity);
+            //Instantiate(mob, GetRandomPositionInsidePolyDistantFromPlayer(hexagonArray, 2f), Quaternion.identity);
+            /*
+            if (spawnTime > (mobSpawnTime / 4))
+            {
+                spawnTime -= .05f;
+            }
+            else
+            {
+                spawnTime = mobSpawnTime - .3f;
+            }
+            */
+            spawnTime = 15;
+            StartCoroutine(SpawnMob(spawnTime));
+        }
+
     }
 
     IEnumerator SpawnTrap()

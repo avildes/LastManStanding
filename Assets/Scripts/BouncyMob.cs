@@ -26,14 +26,31 @@ public class BouncyMob : MonoBehaviour
 
         StartCoroutine(Spawn());
 	}
+    bool once = true;
+
+    void Move()
+    {
+        _direction = target.transform.position - transform.position;
+        //rigidbody2D.AddForce(_direction.normalized * 1000);
+        //Debug.Log("dale");
+    }
 
     void FixedUpdate()
     {
+        if (alive && once)
+        {
+            once = false;
+            //rigidbody2D.velocity = movement;
+            Move();
+            //_direction = target.transform.position - transform.position;
+        }
         if (alive)
         {
-            //rigidbody2D.velocity = movement;
-            _direction = target.transform.position - transform.position;
-            rigidbody2D.velocity = _direction.normalized * speed;
+            /*rigidbody2D.velocity = _direction.normalized * speed;*/
+            //System.Random a = new System.Random();
+            //_direction = new Vector3(a.Next(-4000, 4000), a.Next(-4000, 4000), 0 );
+            //rigidbody2D.velocity = _direction.normalized * 4000;
+            rigidbody2D.AddForce(_direction.normalized * 200);
         }
     }
 
@@ -75,6 +92,20 @@ public class BouncyMob : MonoBehaviour
         {
             StartCoroutine(Die(collider.gameObject));
         }
+    }
+    /*
+    void OnCollisionEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Arena")
+        {
+            Move();
+        }
+    }*/
+    
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == "Arena")
+            Move();
     }
 
     void onSetAtivo(bool ativo)
