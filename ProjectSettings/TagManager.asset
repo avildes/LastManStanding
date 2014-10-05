@@ -12,6 +12,7 @@ TagManager:
   - SeletorFinalScore
   - FinalScoreObject
   - Arena
+  - StaticManager
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

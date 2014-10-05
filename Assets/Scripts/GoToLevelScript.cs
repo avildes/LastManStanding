@@ -12,7 +12,7 @@ public class GoToLevelScript : MonoBehaviour
 
     IEnumerator LoadMenu()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0f);
 
         OnTouchDown();
     }
@@ -28,7 +28,7 @@ public class GoToLevelScript : MonoBehaviour
 
     IEnumerator Load(string level)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.1f);
         Application.LoadLevel(level);
     }
 }
