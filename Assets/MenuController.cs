@@ -32,9 +32,21 @@ public class MenuController : MonoBehaviour
     void Start()
     {
         source = gameObject.GetComponent<AudioSource>();
-        selecao = MENU.PLAY;
         StartCoroutine(WaitAndSet(selecao));
-        
+
+        credits.SetActive(true);
+        game.SetActive(true);
+        tutorial.SetActive(true);
+
+        credits.GetComponent<Animator>().enabled = false;
+        tutorial.GetComponent<Animator>().enabled = false;
+        game.GetComponent<Animator>().enabled = false;
+
+
+        credits.GetComponent<SpriteRenderer>().enabled = false;
+        tutorial.GetComponent<SpriteRenderer>().enabled = false;
+        game.GetComponent<SpriteRenderer>().enabled = false;
+
         //SetSeletor(selecao);
     }
 
@@ -50,7 +62,7 @@ public class MenuController : MonoBehaviour
         {
             if (Input.GetAxis("Horizontal") < 0)
             {
-                if(selecao != MENU.CREDITS)
+                if (selecao != MENU.CREDITS)
                 {
                     source.PlayOneShot(menu_select, .7f);
                     SetSeletor(MENU.CREDITS);
@@ -61,9 +73,10 @@ public class MenuController : MonoBehaviour
                 if (selecao != MENU.TUTORIAL)
                 {
                     source.PlayOneShot(menu_select, .7f);
-                    SetSeletor(MENU.TUTORIAL);   
+                    SetSeletor(MENU.TUTORIAL);
                 }
-            }else if (Input.GetAxis("Vertical") > 0)
+            }
+            else if (Input.GetAxis("Vertical") > 0)
             {
                 if (selecao != MENU.PLAY)
                 {
@@ -97,7 +110,7 @@ public class MenuController : MonoBehaviour
         menuContainer.GetComponent<Animator>().SetTrigger("ShutDown");
         yield return new WaitForSeconds(1.2f);
 
-        if(level.Equals("Game"))
+        if (level.Equals("Game"))
         {
             GameObject.FindGameObjectWithTag("StaticManager").SendMessage("ChangeScene", "Game", SendMessageOptions.DontRequireReceiver);
             //MenuSoundController msc = GameObject.FindGameObjectWithTag("StaticManager").GetComponent<MenuSoundController>();
@@ -109,21 +122,28 @@ public class MenuController : MonoBehaviour
 
     void SetSeletor(MENU menu)
     {
-        credits.SetActive(false);
-        tutorial.SetActive(false);
-        game.SetActive(false);
+
+        credits.GetComponent<Animator>().enabled = false;
+        tutorial.GetComponent<Animator>().enabled = false;
+        game.GetComponent<Animator>().enabled = false;
+        credits.GetComponent<SpriteRenderer>().enabled = false;
+        tutorial.GetComponent<SpriteRenderer>().enabled = false;
+        game.GetComponent<SpriteRenderer>().enabled = false;
         switch (menu)
         {
             case MENU.PLAY:
-                game.SetActive(true);
+                game.GetComponent<Animator>().enabled = true;
+                game.GetComponent<SpriteRenderer>().enabled = true;
                 selecao = MENU.PLAY;
                 break;
             case MENU.CREDITS:
-                credits.SetActive(true);
+                credits.GetComponent<Animator>().enabled = true;
+                credits.GetComponent<SpriteRenderer>().enabled = true;
                 selecao = MENU.CREDITS;
                 break;
             case MENU.TUTORIAL:
-                tutorial.SetActive(true);
+                tutorial.GetComponent<Animator>().enabled = true;
+                tutorial.GetComponent<SpriteRenderer>().enabled = true;
                 selecao = MENU.TUTORIAL;
                 break;
         }
@@ -136,17 +156,38 @@ public class MenuController : MonoBehaviour
         {
             if (level.Equals(gameLevel))
             {
-                game.SetActive(true);
+                credits.GetComponent<Animator>().enabled = false;
+                credits.GetComponent<SpriteRenderer>().enabled = false;
+
+                tutorial.GetComponent<Animator>().enabled = false;
+                tutorial.GetComponent<SpriteRenderer>().enabled = false;
+        
+                game.GetComponent<Animator>().enabled = true;
+                game.GetComponent<SpriteRenderer>().enabled = true;
                 game.GetComponent<Animator>().SetTrigger("pressed");
             }
             else if (level.Equals(creditsLevel))
             {
-                credits.SetActive(true);
+                tutorial.GetComponent<Animator>().enabled = false;
+                tutorial.GetComponent<SpriteRenderer>().enabled = false;
+
+                game.GetComponent<Animator>().enabled = false;
+                game.GetComponent<SpriteRenderer>().enabled = false;
+
+                credits.GetComponent<Animator>().enabled = true;
+                credits.GetComponent<SpriteRenderer>().enabled = true;
                 credits.GetComponent<Animator>().SetTrigger("pressed");
             }
             else if (level.Equals(tutorialLevel))
             {
-                tutorial.SetActive(true);
+                game.GetComponent<Animator>().enabled = false;
+                game.GetComponent<SpriteRenderer>().enabled = false;
+
+                credits.GetComponent<Animator>().enabled = false;
+                credits.GetComponent<SpriteRenderer>().enabled = false;
+
+                tutorial.GetComponent<Animator>().enabled = true;
+                tutorial.GetComponent<SpriteRenderer>().enabled = true;
                 tutorial.GetComponent<Animator>().SetTrigger("pressed");
             }
 

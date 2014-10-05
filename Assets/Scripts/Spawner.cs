@@ -9,9 +9,9 @@ public class Spawner : MonoBehaviour
     public GameObject trap;
 
     private float trapSpawnTime = 12f;
-    public float mobSpawnTime = 2;
+    private float mobSpawnTime = 2f;
 
-	private const float bouncyMobSpawnStartTime = 40;
+    private const float bouncyMobSpawnStartTime = 40;
 	private const float bouncyMobSpawnTime = 15;
 
     public float boundsX1 = 19f;
@@ -97,6 +97,7 @@ public class Spawner : MonoBehaviour
             {
                 spawnTime = mobSpawnTime - .3f;
             }
+
             StartCoroutine(SpawnMob(spawnTime));
         }
     }

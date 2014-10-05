@@ -19,11 +19,14 @@ public class NGUIGameController : MonoBehaviour
     public AudioClip end_game;
 
     public GameObject scoreScreen;
+    public GameObject gameScreen;
+    public GameObject scoreManager;
+    public GameObject endGameBtns;
 
     public GameObject scoreValues;
 
-    public GameObject finalTimeSecondsValueObject;
-    public GameObject finalTimeMillisValueObject;
+    //public GameObject finalTimeSecondsValueObject;
+    //public GameObject finalTimeMillisValueObject;
 
     public GameObject bestTimeSecondsValueObject;
     public GameObject bestTimeMillisValueObject;
@@ -104,12 +107,14 @@ public class NGUIGameController : MonoBehaviour
 
     IEnumerator ShowFinalScore()
     {
-        yield return new WaitForSeconds(.7f);
-
+        yield return new WaitForSeconds(1.5f);
+        scoreManager.SetActive(false);
         scoreScreen.SetActive(true);
+        endGameBtns.SetActive(true);
+        gameScreen.SetActive(false);
         scoreValues.SetActive(true);
 
-        Debug.Log("time: " + _time);
+        //Debug.Log("time: " + _time);
 
         float highScore = PersistenceHelper.Instance.ReadFloat(PersistenceHelper.HIGHTIME_KEY);
 
@@ -118,12 +123,19 @@ public class NGUIGameController : MonoBehaviour
             highScore = _time;
             PersistenceHelper.Instance.PersistFloat(PersistenceHelper.HIGHTIME_KEY, highScore);
         }
-        finalTimeSecondsValueObject.GetComponent<UILabel>().text = string.Format("{0}", (int)_time);
-        Debug.Log("secs: " + string.Format("{0}", (int)_time));
-        Debug.Log("secs.text: " + finalTimeSecondsValueObject.GetComponent<UILabel>().text);
-        finalTimeMillisValueObject.GetComponent<UILabel>().text = string.Format("{0}{1}", ((int)(_time * 10)) % 10, ((int)(_time * 100)) % 10);
-        Debug.Log("millis: " + string.Format("{0}{1}", ((int)(_time * 10)) % 10, ((int)(_time * 100)) % 10));
-        Debug.Log("millis.text: " + finalTimeMillisValueObject.GetComponent<UILabel>().text);
+        scoreManager.gameObject.SetActive(false);
+        //segundos
+        scoreValues.transform.GetChild(1).GetChild(0).GetChild(2).GetComponent<UILabel>().text = string.Format("{0}", (int)_time); ;
+        //milesimos
+        scoreValues.transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<UILabel>().text = string.Format("{0}{1}", ((int)(_time * 10)) % 10, ((int)(_time * 100)) % 10);;
+        //scoreManager.SendMessage("ShowFinalTime", null, SendMessageOptions.DontRequireReceiver);
+
+        //finalTimeSecondsValueObject.GetComponent<UILabel>().text = string.Format("{0}", (int)_time);
+        //Debug.Log("secs: " + string.Format("{0}", (int)_time));
+        //Debug.Log("secs.text: " + finalTimeSecondsValueObject.GetComponent<UILabel>().text);
+        //finalTimeMillisValueObject.GetComponent<UILabel>().text = string.Format("{0}{1}", ((int)(_time * 10)) % 10, ((int)(_time * 100)) % 10);
+        //Debug.Log("millis: " + string.Format("{0}{1}", ((int)(_time * 10)) % 10, ((int)(_time * 100)) % 10));
+        //Debug.Log("millis.text: " + finalTimeMillisValueObject.GetComponent<UILabel>().text);
 
 
         bestTimeSecondsValueObject.GetComponent<UILabel>().text = string.Format("{0}", (int)highScore);

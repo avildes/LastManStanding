@@ -162,34 +162,43 @@ public class PlayerScript : MonoBehaviour
         if (Time.timeScale == 0)
         {
 
-            //StartCoroutine(ExitPause());
-            pause.SetActive(false);
-            
-            musicSrc.Play();
-            fxSrc.Play();
-
-            pause.SetActive(false);
-
-            Time.timeScale = 1;
+            StartCoroutine(ExitPause());
         }
         else
         {
-            musicSrc.Pause();
-            fxSrc.Play();
-
-            pause.SetActive(true);
-            Time.timeScale = 0;
+            StartCoroutine(Pause());
         }
+    }
+
+    IEnumerator Pause()
+    {
+        musicSrc.Pause();
+        fxSrc.Play();
+
+        pause.SetActive(true);
+        Time.timeScale = 0;
+        yield return new WaitForSeconds(1);
     }
 
     IEnumerator ExitPause()
     {
+
+        StartCoroutine(Pause());
+        pause.SetActive(false);
+
+        musicSrc.Play();
         fxSrc.Play();
-        
+
+        pause.SetActive(false);
+
+        Time.timeScale = 1;
+        yield return new WaitForSeconds(1);
+        /*
+        fxSrc.Play();
+
 
         UILabel label = pause.transform.GetChild(0).GetComponent<UILabel>();
         label.text = 3f + "";
-        yield return new WaitForSeconds(1);
         label.text = 2f + "";
         yield return new WaitForSeconds(1);
         label.text = 1f + "";
@@ -199,7 +208,7 @@ public class PlayerScript : MonoBehaviour
         pause.SetActive(false);
 
         Time.timeScale = 1;
-        musicSrc.Play();
+        musicSrc.Play();*/
     }
 
     void FixedUpdate()

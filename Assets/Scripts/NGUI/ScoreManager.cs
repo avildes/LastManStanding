@@ -49,11 +49,16 @@ public class ScoreManager : MonoBehaviour
     {
         _totalTime = 0;
 
-        timeSegundosLabel = timeSegundos.GetComponent<UILabel>();
-        timeMilesimosLabel = timeMilesimos.GetComponent<UILabel>();
-
-        timeSegundosLabel.text = "0";
-        timeMilesimosLabel.text = "00";
+        if (timeSegundos != null)
+        {
+            timeSegundosLabel = timeSegundos.GetComponent<UILabel>();
+            timeSegundosLabel.text = "0";
+        }
+        if (timeMilesimos != null)
+        {
+            timeMilesimosLabel = timeMilesimos.GetComponent<UILabel>();
+            timeMilesimosLabel.text = "00";
+        }
     }
 
     void InicializarHiScore()
@@ -95,6 +100,18 @@ public class ScoreManager : MonoBehaviour
     public float GetTotalTime()
     {
         return _totalTime;
+    }
+
+    public void ShowFinalTime()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(1).GetChild(0).position =
+            new Vector3(
+                -1.555189f,
+                0.8747941f,
+                0
+                );
     }
 
     void onSetAtivo(bool ativo)

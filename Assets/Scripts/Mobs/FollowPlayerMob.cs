@@ -4,7 +4,7 @@ using System;
 
 public class FollowPlayerMob : Mob
 {
-    public float speed = 2.5f;
+    private float speed = 2.5f;
 
     private GameObject target;
 
@@ -18,7 +18,7 @@ public class FollowPlayerMob : Mob
 	{ 
 		get
 		{
-			return gameObject.GetComponent<BoxCollider2D> ();
+			return gameObject.GetComponent<BoxCollider2D>();
 		}
 	}
 
