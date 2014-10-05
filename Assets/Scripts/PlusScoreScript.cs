@@ -22,7 +22,7 @@ public class PlusScoreScript : MonoBehaviour
     void Start ()
     {
         //EventManager.onMobDie += onMobDie;
-        FollowPlayer.onMobDie += onMobDie;
+        Mob.onMobDie += onMobDie;
 	}
 
     void onMobDie(object sender, MobDeathEventArgs args)

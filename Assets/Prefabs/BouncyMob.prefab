@@ -140,11 +140,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80063d16cb35e034dafe5943bbe35ebc, type: 3}
+  m_Script: {fileID: 11500000, guid: c2fc1fad9622b5b498dd3eb04bdd06a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  dieSound: {fileID: 8300000, guid: 36a605ce8566989489c4f9b5ec48b26e, type: 3}
+  dieSound: {fileID: 0}
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
