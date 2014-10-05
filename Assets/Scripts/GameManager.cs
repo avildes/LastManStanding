@@ -9,15 +9,6 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        /*
-		Application.ExternalCall("OnUnityLoaded");
-
-        FacebookManager.Instance.FacebookInitiated += OnFacebookInitiated;
-        FacebookManager.Instance.FacebookDataRetrieved += OnFacebookDataRetrieved;
-
-        FacebookManager.Instance.Init();
-        */
-
         Instance = this;
         DontDestroyOnLoad(this);
     }
@@ -26,7 +17,6 @@ public class GameManager : MonoBehaviour
     {
 	}
 	
-	// Update is called once per frame
 	void Update ()
     {
 	
