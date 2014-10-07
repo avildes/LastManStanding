@@ -8,7 +8,8 @@ public class Spawner : MonoBehaviour
     public GameObject bouncyMob;
     public GameObject trap;
 
-    private float trapSpawnTime = 12f;
+	private float firstTrapSpawnTime = 12f;
+    private float trapSpawnTime = 12.444f;
     private float mobSpawnTime = 2f;
 
     private const float bouncyMobSpawnStartTime = 40;
@@ -75,7 +76,7 @@ public class Spawner : MonoBehaviour
         {
             StartCoroutine(SpawnMob(mobSpawnTime));
             StartCoroutine(SpawnBouncyMob(bouncyMobSpawnStartTime));
-            StartCoroutine(SpawnTraps());
+			StartCoroutine(SpawnTraps(firstTrapSpawnTime));
             oneTime = false;
         }
 
@@ -116,21 +117,9 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnTrap()
+    IEnumerator SpawnTraps(float spawnTime)
     {
-        yield return new WaitForSeconds(trapSpawnTime);
-        trapSpawnTime = 12.444f;
-        //trapSpawnTime += .444f * counter;
-        //counter++;
-        if (_ativo)
-        {
-            Instantiate(trap, GetRandomPosition(), Quaternion.identity);
-        }
-    }
-
-    IEnumerator SpawnTraps()
-    {
-        yield return new WaitForSeconds(trapSpawnTime);
+        yield return new WaitForSeconds(spawnTime);
 
         if (_ativo)
         {
@@ -154,7 +143,7 @@ public class Spawner : MonoBehaviour
                 //Instantiate(trap, randomPosition, Quaternion.identity);
             }
 
-            StartCoroutine(SpawnTraps());
+            StartCoroutine(SpawnTraps(this.trapSpawnTime));
         }
     }
 
