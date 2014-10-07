@@ -41,12 +41,12 @@ public class Spawner : MonoBehaviour
     void StartHexagon()
     {
         hexagonArray = new Vector2[6];
-        hexagonArray[0] = (new Vector2(-1.1f, 2.3f));
-        hexagonArray[1] = (new Vector2(1.1f, 2.3f));
-        hexagonArray[2] = (new Vector2(2.7f, 0f));
-        hexagonArray[3] = (new Vector2(1.1f, -2.3f));
-        hexagonArray[4] = (new Vector2(-1.1f, -2.3f));
-        hexagonArray[5] = (new Vector2(-2.7f, 0f));        
+        hexagonArray[0] = (new Vector2(-1.0f, 2.2f));
+        hexagonArray[1] = (new Vector2(1.0f, 2.2f));
+        hexagonArray[2] = (new Vector2(2.6f, 0f));
+        hexagonArray[3] = (new Vector2(1.0f, -2.2f));
+        hexagonArray[4] = (new Vector2(-1.0f, -2.2f));
+        hexagonArray[5] = (new Vector2(-2.6f, 0f));        
         /*
         hexagonArray[0] = (new Vector2(-1.6f, 2.8f));
         hexagonArray[1] = (new Vector2(1.6f, 2.8f));

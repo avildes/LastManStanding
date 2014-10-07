@@ -136,12 +136,12 @@ public class PlayerScript : MonoBehaviour
                 movement = new Vector2(0, 0);
             }*/
 
-            if (Input.GetKey("joystick button 7") || Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown("joystick button 6") ||  Input.GetKeyDown("joystick button 7") || Input.GetKeyDown(KeyCode.A))
             {
-                //PressedPauseButton();
+                PressedPauseButton();
             }
 
-            if (Input.GetKey("joystick button 0") || Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Space))
             {
                 //	            jumpMomentVector = new Vector2(inputX, inputY);
                 PressedDashButton();
