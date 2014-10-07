@@ -4,7 +4,7 @@ using System;
 
 public class FollowPlayerMob : Mob
 {
-    private float speed = 2.5f;
+    private float speed = 2f;
 
     private GameObject target;
 

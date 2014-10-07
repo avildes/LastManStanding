@@ -75,11 +75,11 @@ public class NGUIGameController : MonoBehaviour
         source.PlayOneShot(start_game2);
 
         yield return new WaitForSeconds(.75f);
-        source.PlayOneShot(start_game);
+        //source.PlayOneShot(start_game);
         //onSetAtivo(true);
         EventManager.Instance.onSetAtivoEvent(true);
-        yield return new WaitForSeconds(1.6f);
         musicSource.Play();
+        yield return new WaitForSeconds(1.6f);
     }
 
     public void SetPoints(int points)

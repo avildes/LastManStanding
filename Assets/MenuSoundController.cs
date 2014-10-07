@@ -4,8 +4,11 @@ using System.Collections;
 public class MenuSoundController : MonoBehaviour
 {
     private string actualScene;
-    private string lastScene;
+    private string lastScene = "";
     private AudioSource source;
+
+    public AudioClip menu;
+    public AudioClip tutorial;
 
     private static MenuSoundController _instance;
 
@@ -51,7 +54,22 @@ public class MenuSoundController : MonoBehaviour
 	
     public void ChangeScene(string scene)
     {
+        if (scene.Equals("Credits")) source.Stop();
         actualScene = scene;
+    }
+
+    private void PlayTutorial()
+    {
+        source.Stop();
+        source.clip = tutorial;
+        source.Play();
+    }
+
+    private void PlayMenu()
+    {
+        source.Stop();
+        source.clip = menu;
+        source.Play();
     }
 
 	void Update ()
@@ -61,13 +79,18 @@ public class MenuSoundController : MonoBehaviour
             lastScene = "Game";
             source.Stop();
         }
+        else if(actualScene.Equals("Credits") && !source.isPlaying)
+        {
+            lastScene = "Credits";
+            PlayTutorial();
+        }
         else
         {
-            if(!source.isPlaying)
+            if(!source.isPlaying || (lastScene.Equals("Credits") && !actualScene.Equals("Credits")))
             {
-                source.Play();
+                PlayMenu();
             }
-            if(lastScene == "Game")
+            if (lastScene.Equals("Game") || lastScene.Equals("Credits"))
             {
                 lastScene = actualScene;
             }

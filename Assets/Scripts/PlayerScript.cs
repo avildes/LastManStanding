@@ -138,7 +138,7 @@ public class PlayerScript : MonoBehaviour
 
             if (Input.GetKey("joystick button 7") || Input.GetKeyDown(KeyCode.A))
             {
-                PressedPauseButton();
+                //PressedPauseButton();
             }
 
             if (Input.GetKey("joystick button 0") || Input.GetKeyDown(KeyCode.Space))

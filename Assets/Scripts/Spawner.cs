@@ -14,6 +14,8 @@ public class Spawner : MonoBehaviour
     private const float bouncyMobSpawnStartTime = 40;
 	private const float bouncyMobSpawnTime = 15;
 
+    private int counter = 1;
+
     public float boundsX1 = 19f;
     public float boundsX2 = 39f;
     public float boundsY1 = 9f;
@@ -117,7 +119,9 @@ public class Spawner : MonoBehaviour
     IEnumerator SpawnTrap()
     {
         yield return new WaitForSeconds(trapSpawnTime);
-
+        trapSpawnTime = 12.444f;
+        //trapSpawnTime += .444f * counter;
+        //counter++;
         if (_ativo)
         {
             Instantiate(trap, GetRandomPosition(), Quaternion.identity);

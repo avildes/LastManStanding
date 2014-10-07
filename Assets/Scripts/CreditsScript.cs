@@ -26,6 +26,8 @@ public class CreditsScript : MonoBehaviour
 
     IEnumerator LoadMenu()
     {
+        GameObject.FindGameObjectWithTag("StaticManager").SendMessage("ChangeScene", "Menu", SendMessageOptions.DontRequireReceiver);
+
         gameObject.GetComponent<Animator>().SetTrigger("CreditsExit");
 
         yield return new WaitForSeconds(1);

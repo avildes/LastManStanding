@@ -215,7 +215,7 @@ AudioSource:
   m_GameObject: {fileID: 109945050}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: f4b34cf836b5abf4e870877e1f279dd8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: da44be083ff4f2c48b6a09dfda695305, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -277,6 +277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cccc271f1c254d43a11eeff3d1e18d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menu: {fileID: 8300000, guid: da44be083ff4f2c48b6a09dfda695305, type: 3}
+  tutorial: {fileID: 8300000, guid: a6a6aacd323d6fb409e552318928ce9c, type: 3}
 --- !u!114 &109945053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1331,8 +1333,8 @@ MonoBehaviour:
   credits: {fileID: 718862522}
   game: {fileID: 1979421315}
   tutorial: {fileID: 548791973}
-  menu_enter: {fileID: 8300000, guid: 459c3ed9421b2974d9d4d613ce1f684b, type: 3}
-  menu_select: {fileID: 8300000, guid: 83f21840ad1e9584482c5668cc158a52, type: 3}
+  menu_enter: {fileID: 8300000, guid: 83f21840ad1e9584482c5668cc158a52, type: 3}
+  menu_select: {fileID: 8300000, guid: f96667e23ca5d3b4498c4254b11e2003, type: 3}
 --- !u!4 &1279955216
 Transform:
   m_ObjectHideFlags: 0
@@ -1487,6 +1489,18 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: c229c281a427f3c4ca9f9a24785d3c86, type: 2}
+      propertyPath: tutorial
+      value: 
+      objectReference: {fileID: 8300000, guid: a6a6aacd323d6fb409e552318928ce9c, type: 3}
+    - target: {fileID: 11400002, guid: c229c281a427f3c4ca9f9a24785d3c86, type: 2}
+      propertyPath: menu
+      value: 
+      objectReference: {fileID: 8300000, guid: da44be083ff4f2c48b6a09dfda695305, type: 3}
+    - target: {fileID: 8200000, guid: c229c281a427f3c4ca9f9a24785d3c86, type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: da44be083ff4f2c48b6a09dfda695305, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c229c281a427f3c4ca9f9a24785d3c86, type: 2}
   m_RootGameObject: {fileID: 109945050}

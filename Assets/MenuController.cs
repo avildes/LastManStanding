@@ -194,6 +194,11 @@ public class MenuController : MonoBehaviour
             //source.PlayOneShot(menu_enter, 1);
             freezeControls = true;
 
+            if (level.Equals("Credits"))
+            {
+                GameObject.FindGameObjectWithTag("StaticManager").SendMessage("ChangeScene", level, SendMessageOptions.DontRequireReceiver);
+            }
+
             StartCoroutine(NewScene(level));
             //menuContainer.GetComponent<Animator>().SetTrigger("ShutDown");
             //yield return new WaitForSeconds(1.2f);
