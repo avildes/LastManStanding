@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GoToLevelScript : MonoBehaviour
+public class GoToLevelScript : BaseClass
 {
 	public string level;
 
@@ -19,11 +19,9 @@ public class GoToLevelScript : MonoBehaviour
 
 	void OnTouchDown()
 	{
-        gameObject.GetComponent<Animator>().SetTrigger("ShutDown");
+        this.animatorCache.SetTrigger("ShutDown");
 
-
-        StartCoroutine(Load(level));
-		
+        StartCoroutine(Load(level));		
 	}
 
     IEnumerator Load(string level)

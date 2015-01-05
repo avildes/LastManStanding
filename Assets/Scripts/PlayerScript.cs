@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// Player controller and behavior
 /// </summary>
-public class PlayerScript : MonoBehaviour
+public class PlayerScript : BaseClass
 {
     /// <summary>
     /// Velocidade do player
@@ -60,7 +60,7 @@ public class PlayerScript : MonoBehaviour
     {
         EventManager.onSetAtivo += onSetAtivo;
 
-        gameObject.GetComponent<TrailRenderer>().enabled = false;
+        this.trailRendererCache.enabled = false;
     }
 
     void onSetAtivo(bool ativo)
@@ -213,7 +213,7 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        rigidbody2D.velocity = movement;
+        this.rigidbodyCache2D.velocity = movement;
     }
 
     void OnCollisionEnter2D(Collision2D hit)
@@ -244,11 +244,11 @@ public class PlayerScript : MonoBehaviour
             alive = false;
 
             movement = new Vector2(0, 0);
-            GetComponent<CircleCollider2D>().enabled = false;
+            this.circleColliderCache2D.enabled = false;
 
             //GetComponent<Animator>().SetTrigger("die");
-            GetComponent<SpriteRenderer>().enabled = false;
-            GetComponent<ParticleSystem>().Play();
+            this.spriteRendererCache.enabled = false;
+            this.particleSystemCache.Play();
 
             Component halo = GetComponent("Halo");
             halo.GetType().GetProperty("enabled").SetValue(halo, false, null);
@@ -298,21 +298,21 @@ public class PlayerScript : MonoBehaviour
 
         this.speed += 2;
         //renderer.material.color = Color.blue;//new Color(255, 0, 0);
-        gameObject.GetComponent<TrailRenderer>().enabled = true;
+        this.trailRendererCache.enabled = true;
         transform.GetChild(0).gameObject.GetComponent<Light>().color = Color.blue;
 
         yield return new WaitForSeconds(.5f);
 
-        gameObject.GetComponent<TrailRenderer>().enabled = false;
+        this.trailRendererCache.enabled = false;
 
-        transform.GetChild(0).gameObject.GetComponent<Light>().color = Color.red;
+        this.transformCache.GetChild(0).gameObject.GetComponent<Light>().color = Color.red;
         //transform.GetChild(0).gameObject.GetComponent<Light>().intensity /= 2;
 
         this.speed -= 2;
 
         yield return new WaitForSeconds(5f);
 
-        transform.GetChild(0).gameObject.GetComponent<Light>().color = Color.white;
+        this.transformCache.GetChild(0).gameObject.GetComponent<Light>().color = Color.white;
         //transform.GetChild(0).gameObject.GetComponent<Light>().intensity *= 2;
         isDashing = false;
         //renderer.material.color = new Color(255, 255, 255);

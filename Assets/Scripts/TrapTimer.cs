@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TrapTimer : MonoBehaviour
+public class TrapTimer : BaseClass
 {
     public float TrapLifeTime;
 
@@ -14,8 +14,8 @@ public class TrapTimer : MonoBehaviour
     {
         EventManager.onSetAtivo += onSetAtivo;
 
-		animator = gameObject.GetComponent<Animator>();
-		collider = gameObject.GetComponent<PolygonCollider2D>();
+        animator = this.animatorCache;
+		collider = this.polygonColliderCache2D;
 		collider.enabled = false;
 
 		StartCoroutine(OnTrapAnimationEnterEnded());
