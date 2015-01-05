@@ -33,8 +33,6 @@ public class BouncyMob : Mob
     void Move()
     {
 		_direction = target.transform.position - transform.position;
-        //rigidbody2D.AddForce(_direction.normalized * 1000);
-        //Debug.Log("dale");
     }
 
     void FixedUpdate()
@@ -49,16 +47,12 @@ public class BouncyMob : Mob
         if (alive && once)
         {
             once = false;
-            //rigidbody2D.velocity = movement;
+         
             Move();
-            //_direction = target.transform.position - transform.position;
+         
         }
         if (alive)
         {
-            /*rigidbody2D.velocity = _direction.normalized * speed;*/
-            //System.Random a = new System.Random();
-            //_direction = new Vector3(a.Next(-4000, 4000), a.Next(-4000, 4000), 0 );
-            //rigidbody2D.velocity = _direction.normalized * 4000;
             rigidbody2D.AddForce(_direction.normalized * 200);
         }
     }

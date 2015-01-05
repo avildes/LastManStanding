@@ -24,19 +24,14 @@ public abstract class Mob : MonoBehaviour
 	}
 	
 	IEnumerator Die(GameObject trapGameObject)
-	{
-		//EventManager.Instance.onMobDieEvent();
-		
+	{	
 		onMobDie(this, new MobDeathEventArgs(trapGameObject));
 		gameObject.GetComponent<AudioSource>().Play();
 		alive = false;
 		
-		//movement = new Vector2(0, 0);
 		_Collider.enabled = false;
-		//GetComponent<SpriteRenderer>().enabled = false;
 		GetComponent<Animator>().SetTrigger("die");
 		GetComponent<ParticleSystem>().Play();
-		//yield return new WaitForSeconds(.01f);
 		yield return new WaitForSeconds(1f);
 		
 		EventManager.onSetAtivo -= onSetAtivo;

@@ -48,7 +48,6 @@ public class FollowPlayerMob : Mob
 
         if (alive)
         {
-            //rigidbody2D.velocity = movement;
 			_direction = target.transform.position - transform.position;
 			rigidbody2D.velocity = _direction.normalized * speed;
         }

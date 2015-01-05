@@ -235,6 +235,16 @@ public class Spawner : MonoBehaviour
         return vector;
     }
 
+
+    /// <summary>
+    /// Checks if a point is inside a polygon
+    /// Author: Eric Haines
+    /// Source: http://wiki.unity3d.com/index.php?title=PolyContainsPoint
+    /// Code was written by Eric in Javascript and I've translated to C#.
+    /// </summary>
+    /// <param name="polyPoints"></param>
+    /// <param name="p"></param>
+    /// <returns></returns>
     public bool ContainsPoint(Vector2[] polyPoints, Vector2 p)
     {
         int j = polyPoints.Length - 1;
