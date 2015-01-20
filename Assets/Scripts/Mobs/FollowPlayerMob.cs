@@ -18,11 +18,11 @@ public class FollowPlayerMob : Mob
 	{ 
 		get
 		{
-			return gameObject.GetComponent<BoxCollider2D>();
+			return this.boxColliderCache2D;
 		}
 	}
 
-	void Start()
+	public void StartMob()
     {
 		StartCoroutine(Spawn());
     }
@@ -30,26 +30,30 @@ public class FollowPlayerMob : Mob
 	IEnumerator Spawn()
 	{
 		target = GameObject.FindGameObjectWithTag("Player");
+        this.animatorCache.SetBool("die", false);
+
 		_Collider.enabled = false;
 		yield return new WaitForSeconds (.75f);
 		_Collider.enabled = true;
-
-		alive = true;
+		
+        alive = true;
 		_ativo = true;
+
 	}
 
     void FixedUpdate()
     {
 		if (target == null)
 		{
-			Destroy(gameObject);
-			return;
+            OnDeath();
+            return;
 		}
 
         if (alive)
         {
-			_direction = target.transform.position - transform.position;
-			rigidbody2D.velocity = _direction.normalized * speed;
+            if (this.spriteRendererCache.enabled == false) this.spriteRendererCache.enabled = true;
+			_direction = target.transform.position - this.transformCache.position;
+			this.rigidbodyCache2D.velocity = _direction.normalized * speed;
         }
     }
 }

@@ -18,12 +18,12 @@ public class BouncyMob : Mob
 	{ 
 		get
 		{
-			return gameObject.GetComponent<CircleCollider2D>();
+			return this.circleColliderCache2D;
 		}
 	}
 
 
-	void Start ()
+	public void StartMob ()
     {
         StartCoroutine(Spawn());
 	}
@@ -32,7 +32,7 @@ public class BouncyMob : Mob
 
     void Move()
     {
-		_direction = target.transform.position - transform.position;
+        _direction = target.transform.position - this.transformCache.position;
     }
 
     void FixedUpdate()
@@ -40,20 +40,26 @@ public class BouncyMob : Mob
 		// Se o player morreu, destroi o objeto
 		if(target == null)
 		{
-			Destroy(gameObject);
-			return;
+            if (GameObject.FindGameObjectWithTag("Player") == null)
+            {
+                StartCoroutine(Spawn());
+            }
+            else
+            {
+                OnDeath();
+            }
+            return;
 		}
 
         if (alive && once)
         {
             once = false;
-         
             Move();
-         
         }
+
         if (alive)
         {
-            rigidbody2D.AddForce(_direction.normalized * 200);
+            this.rigidbodyCache2D.AddForce(_direction.normalized * 200);
         }
     }
 

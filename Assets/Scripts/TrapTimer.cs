@@ -10,13 +10,17 @@ public class TrapTimer : BaseClass
 	private Animator animator;
 	private Collider2D collider;
 
-	void Start ()
+    private bool alive;
+
+	public void StartTrap ()
     {
         EventManager.onSetAtivo += onSetAtivo;
 
         animator = this.animatorCache;
 		collider = this.polygonColliderCache2D;
 		collider.enabled = false;
+
+        alive = true;
 
 		StartCoroutine(OnTrapAnimationEnterEnded());
 
@@ -27,8 +31,10 @@ public class TrapTimer : BaseClass
     {
         if (!ativo)
         {
+            alive = ativo;
             EventManager.onSetAtivo -= onSetAtivo;
-			Destroy(gameObject);
+            EventManager.Instance.onTrapDeathEvent(this.gameObjectCache);
+            //Destroy(gameObject);
         }
     }
 
@@ -41,7 +47,15 @@ public class TrapTimer : BaseClass
 	IEnumerator Timer()
 	{
 		yield return new WaitForSeconds(timer);
+        
+        if(alive)
+        {
+            StartCoroutine(DestroyTrap());
+        }
+    }
 
+    IEnumerator DestroyTrap()
+    {
         EventManager.onSetAtivo -= onSetAtivo;
 
 		animator.SetTrigger("Destroi");
@@ -49,6 +63,18 @@ public class TrapTimer : BaseClass
 
 		yield return new WaitForSeconds(.75f);
 
-		Destroy(gameObject);
+		//Destroy(gameObject);
+        EventManager.Instance.onTrapDeathEvent(this.gameObjectCache);
 	}
+
+    void FixedUpdate()
+    {
+		// Se o player morreu, destroi o objeto
+		if(GameObject.FindGameObjectWithTag("Player") == null)
+		{
+            alive = false;
+            StartCoroutine(DestroyTrap());
+            return;
+		}
+    }
 }

@@ -2,9 +2,10 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-public abstract class Mob : MonoBehaviour
+public abstract class Mob : BaseClass
 {
 	public static event EventHandler<MobDeathEventArgs> onMobDie;
+    //public static event EventHandler onMobDeath;
 	protected bool alive;
 	protected bool _ativo;
 
@@ -25,17 +26,17 @@ public abstract class Mob : MonoBehaviour
 	
 	IEnumerator Die(GameObject trapGameObject)
 	{	
-		onMobDie(this, new MobDeathEventArgs(trapGameObject));
-		gameObject.GetComponent<AudioSource>().Play();
+		//onMobDie(this, new MobDeathEventArgs(trapGameObject));
+		this.audioSourceCache.Play();
 		alive = false;
 		
 		_Collider.enabled = false;
-		GetComponent<Animator>().SetTrigger("die");
-		GetComponent<ParticleSystem>().Play();
+		this.animatorCache.SetBool("die", true);
+		this.particleSystemCache.Play();
 		yield return new WaitForSeconds(1f);
 		
 		EventManager.onSetAtivo -= onSetAtivo;
-		Destroy(gameObject);
+        OnDeath();
 	}
 	
 	void onSetAtivo(bool ativo)
@@ -45,9 +46,23 @@ public abstract class Mob : MonoBehaviour
 		{
 			alive = false;
 			EventManager.onSetAtivo -= onSetAtivo;
-			Destroy(gameObject);
+            OnDeath();
 		}
 	}
+
+    public void OnDeath()
+    {
+        //Destroy(gameObject);
+		this.animatorCache.SetBool("die", true);
+        if(GetComponent<FollowPlayerMob>() != null)
+        {
+            EventManager.Instance.onMobDeathEvent(this.gameObjectCache);
+        }
+        else
+        {
+            EventManager.Instance.onBouncyMobDeathEvent(this.gameObjectCache);
+        }
+    }
 }
 
 public class MobDeathEventArgs : EventArgs
